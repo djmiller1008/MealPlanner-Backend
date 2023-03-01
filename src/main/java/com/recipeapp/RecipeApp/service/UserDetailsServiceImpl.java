@@ -8,20 +8,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.recipeapp.RecipeApp.domain.User;
+import com.recipeapp.RecipeApp.repository.UserRepository;
+import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    
+
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // needs to talk to repository, see if user exists
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword((passwordEncoder.encode("password")));
-        user.setId(1L);
-        return user;
-    }
+        Optional<User> userOpt = userRepository.findByUsername(username);
+
+        return userOpt.orElseThrow(() -> new UsernameNotFoundException("Invalid Credentials"));
+    } 
 }
