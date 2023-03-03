@@ -18,3 +18,11 @@ export const fetchRecipeNutritionInfo = async recipeId => {
     const response = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/nutritionWidget.json?apiKey=${API_KEY}`);
     return response.data;
 }
+
+export const login = async user => {
+    const response = await axios.post('api/auth/login', user);
+    return {
+        jwtToken: response.headers.authorization,
+        user: response.data
+    }
+}
