@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import * as APIUtil from '../util/ApiUtil';
+import { useLocalState } from '../util/LocalStorageUtil';
 
 export default function Login() {
     const [formData, setFormData] = useState({
@@ -6,19 +8,24 @@ export default function Login() {
         password: ''
     })
 
+    const [jwt, setJwt] = useLocalState("", "jwt");
+
     const handleInput = (e, dataType) => {
         setFormData({ ...formData, [dataType]: e.target.value});
     }
 
     const handleSubmit = e => {
         e.preventDefault();
-        // TODO
-        // hit login endpoint on backend
+        APIUtil.login(formData).then(response => {
+            if (!jwt) {
+                setJwt(response.jwtToken);
+            }
+        });
     }
 
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor='username'>Username</label>
                 <input onChange={e => handleInput(e, 'username')} type='text'></input>
                 <label htmlFor='password'>Password</label>
