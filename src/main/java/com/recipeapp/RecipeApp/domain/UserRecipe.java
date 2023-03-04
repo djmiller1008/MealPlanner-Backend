@@ -12,9 +12,18 @@ public class UserRecipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private User user;
 
     public Long getId() {
         return this.id;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setId(Long id) {
