@@ -25,7 +25,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
     
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<UserRecipe> recipes = new ArrayList<>();
 
     public Long getId() {
