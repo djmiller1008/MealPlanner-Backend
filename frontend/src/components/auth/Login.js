@@ -1,14 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom';
 import * as APIUtil from '../util/ApiUtil';
 import { useLocalState } from '../util/LocalStorageUtil';
 
 export default function Login() {
+    const history = useHistory();
+
+    const [jwt, setJwt] = useLocalState("", "jwt");
+
     const [formData, setFormData] = useState({
         username: '',
         password: ''
-    })
+    });
 
-    const [jwt, setJwt] = useLocalState("", "jwt");
+    useEffect(() => {
+        if (jwt) {
+            history.replace("/");
+        }
+    }, [jwt, history]);
+
 
     const handleInput = (e, dataType) => {
         setFormData({ ...formData, [dataType]: e.target.value});
@@ -20,7 +30,7 @@ export default function Login() {
             if (!jwt) {
                 setJwt(response.jwtToken);
             }
-        });
+        })
     }
 
     return (
