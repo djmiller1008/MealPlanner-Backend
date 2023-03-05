@@ -22,8 +22,6 @@ public class UserRecipeController {
     @PostMapping("")
     public ResponseEntity<?> createUserRecipe(@RequestBody String name, @AuthenticationPrincipal User user) {
         UserRecipe newUserRecipe = userRecipeService.createUserRecipe(user, name);
-
         return ResponseEntity.ok(newUserRecipe);
     }
-    
 }
