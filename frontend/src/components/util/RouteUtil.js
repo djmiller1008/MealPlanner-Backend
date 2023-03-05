@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocalState } from './LocalStorageUtil';
-import { Route, Redirect, withRouter } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 export const PrivateRoute = (props) => {
     const [jwt, setJwt] = useLocalState("", "jwt");
@@ -12,7 +12,7 @@ export const PrivateRoute = (props) => {
     );
 }
 
-export const AuthRoute = ({ component: Component, ...props }) => {
+export const AuthRoute = (props) => {
     const [jwt, setJwt] = useLocalState("", "jwt");
 
     return jwt ? (
