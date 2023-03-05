@@ -1,5 +1,8 @@
-import axios from "axios"
-import { API_KEY } from "../../config/keys"
+import axios from "axios";
+import { API_KEY } from "../../config/keys";
+
+axios.defaults.headers.post['Authorization'] = `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`;
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export const fetchRecipeSearchResults = async (searchQuery, searchFilters) => {
     const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}`, {
@@ -25,4 +28,9 @@ export const login = async user => {
         jwtToken: response.headers.authorization,
         user: response.data
     }
+}
+
+export const addUserRecipe = async recipeData => {
+    const response = await axios.post('/api/user-recipes', recipeData);
+    return response;
 }
