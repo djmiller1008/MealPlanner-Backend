@@ -13,15 +13,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 
 import java.io.IOException;
 
 import com.recipeapp.RecipeApp.repository.UserRepository;
 import com.recipeapp.RecipeApp.util.JwtUtil;
 
-import java.util.Optional;
-import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -36,6 +33,8 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
+
+                
         if (request.getCookies() == null) {
             chain.doFilter(request, response);
             return;
@@ -73,7 +72,6 @@ public class JwtFilter extends OncePerRequestFilter {
         // User is valid 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         
-        chain.doFilter(request, response);
-        
+        chain.doFilter(request, response);        
     }
 }
