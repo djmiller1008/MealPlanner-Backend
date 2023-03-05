@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import parse from 'html-react-parser';
-import { fetchRecipeInfo, fetchRecipeNutritionInfo } from '../../util/ApiUtil';
+import { fetchRecipeInfo, 
+         fetchRecipeNutritionInfo,
+         addUserRecipe } from '../../util/ApiUtil';
 
 export default function RecipeItem() {
   const params = useParams();
-
   const [recipeInfo, setRecipeInfo] = useState({});
   const [recipeNutritionInfo, setRecipeNutritionInfo] = useState({});
   
@@ -24,22 +25,27 @@ export default function RecipeItem() {
     getRecipeNutritionInfo();
   }, []);
 
+  const addRecipe = (e) => {
+    e.preventDefault();
+    addUserRecipe({ name: recipeInfo.title });
+  }
+
   if (JSON.stringify(recipeInfo) === '{}') {
     return (   
         <div>Loading...</div>
     )
   } else {
-    
     return (
       <div>
           <h1>{recipeInfo.title}</h1>
+          <button onClick={(e) => addRecipe(e)}>Add This Recipe</button>
           <img src={recipeInfo.image} alt={recipeInfo.title}></img>
           <section>
             <p>Ready in: {recipeInfo.readyInMinutes} minutes</p>
             <p>Servings: {recipeInfo.servings}</p>
             <h3>Ingredients</h3>
             <ul>
-              {Object.values(recipeInfo.extendedIngredients).map(ingredient => <li>{ingredient.original}</li>)}
+              {Object.values(recipeInfo.extendedIngredients).map((ingredient, idx) => <li key={idx}>{ingredient.original}</li>)}
             </ul>
             <h3>Instructions</h3>
             <div>{parse(recipeInfo.instructions)}</div>
