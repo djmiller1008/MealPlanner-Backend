@@ -17,7 +17,6 @@ public class UserRecipeService {
         UserRecipe userRecipe = new UserRecipe();
         userRecipe.setName(name);
         userRecipe.setUser(user);
-
         return userRecipeRepository.save(userRecipe);
     }
 }
