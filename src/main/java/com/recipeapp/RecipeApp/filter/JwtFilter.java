@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.http.HttpHeaders;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -39,21 +40,19 @@ public class JwtFilter extends OncePerRequestFilter {
             chain.doFilter(request, response);
             return;
         }
+
         // Get authorization header and validate
-        Optional<Cookie> jwtOpt = Arrays.stream(request.getCookies())
-              .filter(cookie -> "jwt".equals(cookie.getName()))
-              .findAny();
-        
-        if (jwtOpt.isEmpty()) {
+        final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
+        if (header.isEmpty() || !header.startsWith("Bearer ")) {
             chain.doFilter(request, response);
             return;
         }
 
-        String token = jwtOpt.get().getValue();
+        final String token = header.split(" ")[1].trim();
+
         UserDetails userDetails = userRepository.findByUsername(jwtUtil.getUsernameFromToken(token))
                                         .orElse(null);
-      
-        
+    
         // Get jwt token and validate
         if (!jwtUtil.validateToken(token, userDetails)) {
             chain.doFilter(request, response);
