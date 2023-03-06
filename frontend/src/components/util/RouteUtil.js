@@ -4,7 +4,6 @@ import { Route, Redirect } from 'react-router-dom';
 
 export const PrivateRoute = (props) => {
     const [jwt, setJwt] = useLocalState("", "jwt");
-
     return jwt ? (
         <Route {...props} />
     ) : (
@@ -14,7 +13,6 @@ export const PrivateRoute = (props) => {
 
 export const AuthRoute = (props) => {
     const [jwt, setJwt] = useLocalState("", "jwt");
-
     return jwt ? (
         <Redirect to="/" />
     ) : (
