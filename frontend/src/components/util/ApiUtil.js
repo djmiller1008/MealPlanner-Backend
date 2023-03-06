@@ -1,8 +1,13 @@
 import axios from "axios";
 import { API_KEY } from "../../config/keys";
 
-axios.defaults.headers.post['Authorization'] = `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
+const springRequestConfig = {
+    headers: {
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`,
+        'Content-Type': 'application/json'
+    }
+}
+
 
 export const fetchRecipeSearchResults = async (searchQuery, searchFilters) => {
     const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}`, {
@@ -36,6 +41,11 @@ export const addUserRecipe = async recipeData => {
 } 
 
 export const createUserMealPlan = async mealPlanData => {
-    const response = await axios.post('api/user-mealplans', mealPlanData);
+    const response = await axios.post('api/user-mealplans', mealPlanData, springRequestConfig);
+    return response;
+}
+
+export const fetchUserMealPlans = async () => {
+    const response = await axios.get('api/user-mealplans', springRequestConfig);
     return response;
 }
