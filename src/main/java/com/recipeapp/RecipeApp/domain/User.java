@@ -11,13 +11,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import org.springframework.security.core.GrantedAuthority;
 
-
- 
 @Entity
 @Table(name="users")
 public class User implements UserDetails {
@@ -27,10 +23,18 @@ public class User implements UserDetails {
     private Long id;
     private String username;
     private String password;
-    
+
     @OneToMany(mappedBy = "user")
     @JsonIgnore
-    private List<UserRecipe> recipes = new ArrayList<>();
+    private List<UserMealPlan> mealPlans = new ArrayList<>();
+
+    public List<UserMealPlan> getMealPlans() {
+        return this.mealPlans;
+    }
+
+    public void setMealPlans(List<UserMealPlan> mealPlans) {
+        this.mealPlans = mealPlans;
+    }
 
     public Long getId() {
         return this.id;
@@ -54,14 +58,6 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<UserRecipe> getRecipes() {
-        return this.recipes;
-    }
-
-    public void setRecipes(List<UserRecipe> recipes) {
-        this.recipes = recipes;
     }
 
     @Override
