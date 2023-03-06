@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { createUserMealPlan } from '../util/ApiUtil';
 
 export default function CreateMealPlan() {
+    const history = useHistory();
     const [mealPlanName, setMealPlanName] = useState("");
 
     const handleInput = (e) => {
@@ -10,9 +12,8 @@ export default function CreateMealPlan() {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      createUserMealPlan(mealPlanName).then(result => {
-        debugger;
-        console.log(result);
+      createUserMealPlan(mealPlanName).then(() => {
+        history.replace("/");
       })
     }
     
