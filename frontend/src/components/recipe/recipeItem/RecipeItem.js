@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import parse from 'html-react-parser';
 import { fetchRecipeInfo, 
-         fetchRecipeNutritionInfo,
-         addUserRecipe } from '../../util/ApiUtil';
+         fetchRecipeNutritionInfo } from '../../util/ApiUtil';
 
 export default function RecipeItem() {
   const params = useParams();
@@ -25,11 +24,6 @@ export default function RecipeItem() {
     getRecipeNutritionInfo();
   }, []);
 
-  const addRecipe = (e) => {
-    e.preventDefault();
-    addUserRecipe({ name: recipeInfo.title });
-  }
-
   if (JSON.stringify(recipeInfo) === '{}') {
     return (   
         <div>Loading...</div>
@@ -38,7 +32,6 @@ export default function RecipeItem() {
     return (
       <div>
           <h1>{recipeInfo.title}</h1>
-          <button onClick={(e) => addRecipe(e)}>Add This Recipe</button>
           <img src={recipeInfo.image} alt={recipeInfo.title}></img>
           <section>
             <p>Ready in: {recipeInfo.readyInMinutes} minutes</p>
