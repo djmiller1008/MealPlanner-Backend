@@ -7,6 +7,8 @@ import com.recipeapp.RecipeApp.repository.UserMealPlanRepository;
 import com.recipeapp.RecipeApp.domain.User;
 import com.recipeapp.RecipeApp.domain.UserMealPlan;
 
+import java.util.Set;
+
 @Service
 public class UserMealPlanService {
 
@@ -18,5 +20,9 @@ public class UserMealPlanService {
         userMealPlan.setName(name);
         userMealPlan.setUser(user);
         return userMealPlanRepository.save(userMealPlan);
+    }
+
+    public Set<UserMealPlan> findByUser(User user) {
+        return userMealPlanRepository.findByUser(user);
     }
 }
