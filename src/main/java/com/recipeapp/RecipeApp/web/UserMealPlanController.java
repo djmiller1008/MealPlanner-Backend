@@ -3,6 +3,7 @@ package com.recipeapp.RecipeApp.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,5 +24,10 @@ public class UserMealPlanController {
     public ResponseEntity<?> createUserMealPlan(@AuthenticationPrincipal User user, @RequestBody String name) {
         UserMealPlan newUserMealPlan = userMealPlanService.createUserMealPlan(user, name);
         return ResponseEntity.ok(newUserMealPlan);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<?> fetchUserMealPlans(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(userMealPlanService.findByUser(user));
     }
 }
