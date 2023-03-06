@@ -31,6 +31,11 @@ export const login = async user => {
 }
 
 export const addUserRecipe = async recipeData => {
-    const response = await axios.post('/api/user-recipes', recipeData);
+    const response = await axios.post('/api/user-meals', recipeData);
+    return response;
+} 
+
+export const createUserMealPlan = async mealPlanData => {
+    const response = await axios.post('api/user-mealplans', mealPlanData);
     return response;
 }
