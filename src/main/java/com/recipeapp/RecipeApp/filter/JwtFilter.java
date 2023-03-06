@@ -34,12 +34,6 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
-                
-        if (request.getCookies() == null) {
-            chain.doFilter(request, response);
-            return;
-        }
-
         // Get authorization header and validate
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (header.isEmpty() || !header.startsWith("Bearer ")) {
