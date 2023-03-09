@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import parse from 'html-react-parser';
 import { fetchRecipeInfo, 
          fetchRecipeNutritionInfo } from '../../util/ApiUtil';
@@ -32,6 +32,10 @@ export default function RecipeItem() {
     return (
       <div>
           <h1>{recipeInfo.title}</h1>
+          <Link to={{ pathname: '/addMeal',
+                      state: { recipeInfo: recipeInfo,
+                               recipeNutritionInfo: recipeNutritionInfo }}}>
+                        Add To Meal Plan</Link>
           <img src={recipeInfo.image} alt={recipeInfo.title}></img>
           <section>
             <p>Ready in: {recipeInfo.readyInMinutes} minutes</p>
