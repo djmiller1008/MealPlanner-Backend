@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { fetchUserMealPlans } from '../util/ApiUtil';
+import { Link } from 'react-router-dom';
 
 export default function MealPlansDisplay() {
     const [mealPlans, setMealPlans] = useState(null);
@@ -10,11 +11,21 @@ export default function MealPlansDisplay() {
         })
     }, []);
 
+    
   return (
     <div>
         <h1>My Meal Plans</h1>
         <div>
-            {mealPlans ? mealPlans.map((mealPlan, idx) => <div key={idx}>{mealPlan.name}</div>) : <></>}
+            {mealPlans ? mealPlans.map((mealPlan, idx) => {
+                return (
+                    <div key={idx}>
+                        <Link to={{ pathname: `/mealPlan/${mealPlan.id}`,
+                                    state: { mealPlan: mealPlan }}}>
+                            {mealPlan.name}
+                        </Link>
+                    </div>
+                )})
+                : <></>}
         </div>
     </div>
   )
