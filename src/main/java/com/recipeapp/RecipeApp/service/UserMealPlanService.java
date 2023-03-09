@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import com.recipeapp.RecipeApp.repository.UserMealPlanRepository;
 import com.recipeapp.RecipeApp.domain.User;
 import com.recipeapp.RecipeApp.domain.UserMealPlan;
+import com.recipeapp.RecipeApp.domain.UserMeal;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -24,5 +26,10 @@ public class UserMealPlanService {
 
     public Set<UserMealPlan> findByUser(User user) {
         return userMealPlanRepository.findByUser(user);
+    }
+
+    public List<UserMeal> findMealsByMealPlanId(Long mealPlanId) {
+        UserMealPlan userMealPlan = userMealPlanRepository.findById(mealPlanId).get();
+        return userMealPlan.getMeals();
     }
 }
