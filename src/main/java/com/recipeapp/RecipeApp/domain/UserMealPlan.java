@@ -3,6 +3,7 @@ package com.recipeapp.RecipeApp.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -21,13 +22,12 @@ public class UserMealPlan {
     private String name;
 
     @OneToMany
-    @JsonIgnore
+    @JsonBackReference
     private List<UserMeal> meals = new ArrayList<>();
 
     @ManyToOne
     @JsonIgnore
     private User user;
-
 
     public User getUser() {
         return this.user;
@@ -60,6 +60,10 @@ public class UserMealPlan {
 
     public void setMeals(List<UserMeal> meals) {
         this.meals = meals;
+    }
+
+    public void addMeal(UserMeal meal) {
+        this.meals.add(meal);
     }
 
 
