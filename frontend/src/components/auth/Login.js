@@ -24,7 +24,7 @@ export default function Login() {
         setFormData({ ...formData, [dataType]: e.target.value});
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = e => {  
         e.preventDefault();
         APIUtil.login(formData).then(response => {
             if (!jwt) {
