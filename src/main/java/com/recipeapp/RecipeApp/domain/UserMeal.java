@@ -1,7 +1,5 @@
 package com.recipeapp.RecipeApp.domain;
 
-import java.util.ArrayList;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,14 +16,53 @@ public class UserMeal {
     private String name;
     private int readyInMinutes;
     private int servings;
-    private ArrayList<String> ingredients;
+
+    private String ingredients;
+
     private String instructions;
     private int calories;
     private int fat;
     private int carbohydrates;
+    private int spoonacularId;
+    private String imageUrl;
 
     @ManyToOne
     private UserMealPlan userMealPlan;
+
+
+    public String getIngredients() {
+        return this.ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public String getImageUrl() {
+        return this.imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+
+    public int getSpoonacularId() {
+        return this.spoonacularId;
+    }
+
+    public void setSpoonacularId(int spoonacularId) {
+        this.spoonacularId = spoonacularId;
+    }
+
+    public UserMealPlan getUserMealPlan() {
+        return this.userMealPlan;
+    }
+
+    public void setUserMealPlan(UserMealPlan userMealPlan) {
+        this.userMealPlan = userMealPlan;
+    }
+
 
     public int getReadyInMinutes() {
         return this.readyInMinutes;
@@ -41,14 +78,6 @@ public class UserMeal {
 
     public void setServings(int servings) {
         this.servings = servings;
-    }
-
-    public ArrayList<String> getIngredients() {
-        return this.ingredients;
-    }
-
-    public void setIngredients(ArrayList<String> ingredients) {
-        this.ingredients = ingredients;
     }
 
     public String getInstructions() {
