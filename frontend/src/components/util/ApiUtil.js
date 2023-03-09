@@ -49,3 +49,14 @@ export const fetchUserMealPlans = async () => {
     const response = await axios.get('api/user-mealplans', springRequestConfig);
     return response;
 }
+
+export const addMealToMealPlan = async mealData => {
+    const response = await axios.post('api/user-meals', mealData, springRequestConfig);
+    return response;
+}
+
+export const fetchUserMealPlanMeals = async mealPlanId => {
+    const response = await axios.get(`/api/user-mealplans/${mealPlanId}`, springRequestConfig);
+    return response;
+    
+} 
