@@ -10,4 +10,5 @@ import java.util.Set;
 public interface UserMealPlanRepository extends JpaRepository<UserMealPlan, Long> {
     
     Set<UserMealPlan> findByUser(User user);
+
 }
