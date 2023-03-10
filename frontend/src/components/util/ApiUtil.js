@@ -58,5 +58,5 @@ export const addMealToMealPlan = async mealData => {
 export const fetchUserMealPlanMeals = async mealPlanId => {
     const response = await axios.get(`/api/user-mealplans/${mealPlanId}`, springRequestConfig);
     return response;
-    
 } 
+
