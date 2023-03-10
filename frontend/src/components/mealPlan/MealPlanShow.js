@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import { fetchUserMealPlanMeals } from '../util/ApiUtil';
-import { useLocalState } from '../util/LocalStorageUtil'
+
 
 export default function MealPlanShow(props) {
-  const [mealPlanData, setMealPlanData] = useLocalState(
-      props.location.state.mealPlan,
-      `mealPlan${props.location.state.mealPlan.id}`
-  );
+  const params = useParams();
 
   const [meals, setMeals] = useState(null);
+  const [mealPlanName, setMealPlanName] = useState("");
 
   useEffect(() => {
-    fetchUserMealPlanMeals(mealPlanData.id).then(result => {
-      setMeals(result.data);
+    fetchUserMealPlanMeals(params.id).then(result => {
+      setMeals(result.data.userMealsResponse);
+      setMealPlanName(result.data.userMealPlanResponse.name);
     })
   }, [])
 
   
   return (
     <div>
-        <h1>{mealPlanData.name}</h1>
+        <h1>{mealPlanName}</h1>
         {meals ? meals.map(meal => <div>{meal.name}</div>) : ""}
     </div>
   )
