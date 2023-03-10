@@ -19,8 +19,7 @@ export default function MealPlansDisplay() {
             {mealPlans ? mealPlans.map((mealPlan, idx) => {
                 return (
                     <div key={idx}>
-                        <Link to={{ pathname: `/mealPlan/${mealPlan.id}`,
-                                    state: { mealPlan: mealPlan }}}>
+                        <Link to={`/mealPlan/${mealPlan.id}`}>
                             {mealPlan.name}
                         </Link>
                     </div>
