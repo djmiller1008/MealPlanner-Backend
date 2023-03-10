@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.recipeapp.RecipeApp.dto.UserMealPlanResponse;
 import com.recipeapp.RecipeApp.service.UserMealPlanService;
 import com.recipeapp.RecipeApp.domain.User;
 import com.recipeapp.RecipeApp.domain.UserMealPlan;
@@ -33,8 +34,10 @@ public class UserMealPlanController {
     }
 
     @GetMapping("{mealPlanId}")
-    public ResponseEntity<?> fetchUserMealPlan(@PathVariable Long mealPlanId, @AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(userMealPlanService.findMealsByMealPlanId(mealPlanId));
-
+    public ResponseEntity<UserMealPlanResponse<?,?>> fetchUserMealPlan(@PathVariable Long mealPlanId, @AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(new UserMealPlanResponse<>(
+                        userMealPlanService.findMealsByMealPlanId(mealPlanId),
+                        userMealPlanService.findById(mealPlanId))
+        );
     }
 }
