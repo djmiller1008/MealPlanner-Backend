@@ -32,4 +32,9 @@ public class UserMealPlanService {
         UserMealPlan userMealPlan = userMealPlanRepository.findById(mealPlanId).get();
         return userMealPlan.getMeals();
     }
+
+    public UserMealPlan findById(Long mealPlanId) {
+        UserMealPlan userMealPlan = userMealPlanRepository.findById(mealPlanId).get();
+        return userMealPlan;
+    }
 }
