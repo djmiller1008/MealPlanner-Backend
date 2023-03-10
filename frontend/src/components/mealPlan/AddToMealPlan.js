@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom';
 import { addMealToMealPlan, fetchUserMealPlans } from '../util/ApiUtil';
 import { useLocalState } from '../util/LocalStorageUtil';
 
 export default function AddToMealPlan(props) {
+    const history = useHistory();
+
     const [recipeInfo, setRecipeInfo] = useLocalState(
                                                     props.location.state.recipeInfo,
                                                     `recipeInfo${props.location.state.recipeInfo.id}`);
@@ -49,7 +52,8 @@ export default function AddToMealPlan(props) {
         });
         mealData['mealPlanId'] = mealPlanId;
 
-        addMealToMealPlan(JSON.stringify(mealData));
+        addMealToMealPlan(JSON.stringify(mealData))
+            .then(() => history.replace(`/mealPlan/${mealPlanId}`));
     }
 
   
