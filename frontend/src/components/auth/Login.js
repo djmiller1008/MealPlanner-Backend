@@ -3,22 +3,26 @@ import { useHistory } from 'react-router-dom';
 import * as APIUtil from '../util/ApiUtil';
 import { useLocalState } from '../util/LocalStorageUtil';
 
-export default function Login() {
+export default function Login(props) {
     const history = useHistory();
 
     const [jwt, setJwt] = useLocalState("", "jwt");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const [formData, setFormData] = useState({
         username: '',
         password: ''
-    });
+    }); 
 
     useEffect(() => {
         if (jwt) {
-            history.replace("/");
+            APIUtil.validateJwtToken(jwt).then(result => {
+                if (result.data === true) {
+                    history.replace("/");
+                }
+            })
         }
-    }, [jwt, history]);
-
+    });
 
     const handleInput = (e, dataType) => {
         setFormData({ ...formData, [dataType]: e.target.value});
@@ -27,7 +31,8 @@ export default function Login() {
     const handleSubmit = e => {  
         e.preventDefault();
         APIUtil.login(formData).then(response => {
-            if (!jwt) {
+            setErrorMessage(response.message);
+            if (response.jwtToken) {
                 setJwt(response.jwtToken);
             }
         })
@@ -35,6 +40,7 @@ export default function Login() {
 
     return (
         <div>
+            <div>{errorMessage}</div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='username'>Username</label>
                 <input onChange={e => handleInput(e, 'username')} type='text'></input>
