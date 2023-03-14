@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom';
 
 export default function MealPlansDisplay() {
     const [mealPlans, setMealPlans] = useState(null);
-
+    
     useEffect(() => {
         fetchUserMealPlans().then(result => {
             setMealPlans(result.data);
         })
     }, []);
 
-    
   return (
     <div>
         <h1>My Meal Plans</h1>
