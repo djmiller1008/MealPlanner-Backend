@@ -15,6 +15,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 
 import java.io.IOException;
+import io.jsonwebtoken.ExpiredJwtException;
 
 import com.recipeapp.RecipeApp.repository.UserRepository;
 import com.recipeapp.RecipeApp.util.JwtUtil;
@@ -48,10 +49,19 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         final String token = header.split(" ")[1].trim();
+        UserDetails userDetails = null;
 
-        UserDetails userDetails = userRepository.findByUsername(jwtUtil.getUsernameFromToken(token))
+        try {
+            userDetails = userRepository.findByUsername(jwtUtil.getUsernameFromToken(token))
                                         .orElse(null);
-    
+
+        } catch (ExpiredJwtException e) {
+            chain.doFilter(request, response);
+            return;
+        }
+        
+        
+
         // Get jwt token and validate
         if (!jwtUtil.validateToken(token, userDetails)) {
             chain.doFilter(request, response);
