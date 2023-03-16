@@ -1,0 +1,149 @@
+.outer-container {
+    margin-bottom: 6rem;
+}
+
+.landing-header {
+    display: flex;
+    justify-content: center;
+}
+
+.app-title {
+    font-size: 1.75rem;
+    margin-top: 2rem;
+    font-weight: 600;
+}
+/* Position and sizing of burger button */
+.bm-burger-button {
+    position: fixed;
+    width: 28px;
+    height: 20px;
+    left: 36px;
+    top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+    background: black;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+    background: #5ebd21;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+    height: 24px;
+    width: 24px;
+    top: 32px;
+    left: 36px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+    background: black;
+}
+
+.bm-menu {
+    background: rgb(226, 230, 233);
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+}
+
+.bm-morph-shape {
+    fill: rgb(226, 230, 233);
+  }
+
+.bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+}
+
+  /* Wrapper for item list */
+.bm-item-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: #b8b7ad;
+    padding: 0.8em;
+}
+  
+  /* Individual item */
+.bm-item {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-size: 1.25rem;
+}
+
+.bm-overlay {
+    background: none !important;
+}
+
+.landing-body-title {
+    font-size: 3rem;
+    text-align: center;
+    color: #464646;
+    font-family: "chaparral-pro",serif;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.logo {
+    color: #5ebd21;
+    font-size: 1.35rem;
+}
+
+.logo-small-screen {
+    margin-top: 2.2rem;
+    margin-right: .25rem;
+}
+
+.menu-item {
+    color: black;
+}
+
+.menu-item:hover {
+    cursor: pointer;
+}
+
+@media (min-width: 780px) {
+    .landing-header {
+        margin-top: 2rem;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    .app-title-big-screen {
+        font-size: 1.75rem;
+        margin-left: 2rem;
+        font-weight: 600;
+    }
+
+    .title-and-links {
+        display: flex;
+        align-items: baseline;
+    }
+
+    .nav-links-section {
+        display: flex;
+        margin-right: 2rem;
+    }
+
+    .login-button {
+        background-color: #5ebd21;
+        padding: 0.8rem 2.5rem;
+        border-radius: 1rem;
+        color: white;
+        font-weight: 500;
+    }
+
+    .title-link {
+        margin-left: 2rem;
+    }
+
+    .logo-big-screen {
+        position: relative;
+        left: 1.5rem;
+    }
+}
