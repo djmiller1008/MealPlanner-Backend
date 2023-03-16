@@ -13,7 +13,7 @@ export const PrivateRoute = props => {
            setIsLoading(false);
         });
     } else {
-        return <Redirect to="/login" />;
+        return <Redirect to="/home" />;
     }
 
     if (isLoading) {
@@ -22,7 +22,7 @@ export const PrivateRoute = props => {
         if (isValid) {
             return <Route {...props} />;
         } else {
-            return <Redirect to="/login" />;
+            return <Redirect to="/home" />;
         }
     }
 }
