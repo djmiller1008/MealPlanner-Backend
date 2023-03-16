@@ -18,7 +18,7 @@ export default function Login(props) {
         if (jwt) {
             APIUtil.validateJwtToken(jwt).then(result => {
                 if (result.data === true) {
-                    history.replace("/");
+                    history.replace("/dashboard");
                 }
             })
         }
