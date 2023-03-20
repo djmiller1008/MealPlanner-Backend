@@ -51,11 +51,9 @@ export default function MealSearch() {
           <section className='search-button-section'>
             <button className='nav-button search-button' onClick={handleSearch}>Search</button>
           </section>
-
-             
-        
-          {renderSearchResults()}
-      </div>
+        </div>
+        {renderSearchResults()}
+      
     </>
   )
 }
