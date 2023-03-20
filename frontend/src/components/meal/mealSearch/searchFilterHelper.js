@@ -7,7 +7,7 @@ export const cuisines = ["African", "American",
 
 export const diets = ["Gluten Free", "Ketogenic", "Vegetarian",
                         "Lacto-Vegetarian", "Ovo-Vegetarian", "Vegan",
-                        "Pescetarian", "Paleo"]
+                        "Pescatarian", "Paleo"];
                     
 
 
