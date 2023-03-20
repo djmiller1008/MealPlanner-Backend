@@ -4,8 +4,8 @@ import MealSearchListItem from './MealSearchListItem';
 export default function MealSearchList({ recipes }) {
 
   return (
-    <div>
-        {recipes.map(recipe => <li><MealSearchListItem recipe={recipe} /></li>)}
+    <div className='search-results-div'>
+        {recipes.map(recipe => <MealSearchListItem recipe={recipe} />)}
     </div>
   )
 }
