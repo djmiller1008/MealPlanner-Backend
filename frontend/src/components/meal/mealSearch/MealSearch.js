@@ -25,9 +25,16 @@ export default function MealSearch() {
   }
 
   const renderSearchResults = () => {
+    if (searchResults.message) {
+      return (
+        <div className='error-div'>
+          {searchResults.message}
+        </div>
+      )
+    }
     if (searchResults.length > 0) {
         return <MealSearchList recipes={searchResults} />
-    }
+    } 
   }
 
   return (
