@@ -53,7 +53,6 @@ export default function MealSearch() {
           </section>
         </div>
         {renderSearchResults()}
-      
     </>
   )
 }

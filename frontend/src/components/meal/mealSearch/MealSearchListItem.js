@@ -9,7 +9,6 @@ export default function MealSearchListItem({ recipe }) {
           <section className='searchlist-item-text-section'>
             <h3 className='searchlist-item-text'>{recipe.title}</h3>
           </section>
-        
         </Link>
     </div>
   )
