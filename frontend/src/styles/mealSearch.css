@@ -60,7 +60,6 @@
     width: 10rem;
     height: 15rem;
     background-size: cover;
-    
 }
 
 .searchlist-item-div:hover {
@@ -76,7 +75,7 @@
 }
 
 .searchlist-item-image {
-    width: 100%;
+    width: 10rem;
     height: 9rem;
     border-bottom: 1px;
     border-color: rgb(230, 230, 212);
@@ -104,9 +103,5 @@
 
     .search-filter-select {
         margin-right: 1rem;
-    }
-
-    .searchlist-item-div {
-        flex-basis: 21%;
     }
 }
