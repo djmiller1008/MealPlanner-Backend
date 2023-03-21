@@ -96,6 +96,10 @@
     font-size: 0.9rem;
 }
 
+.error-div {
+    text-align: center;
+}
+
 @media (min-width: 780px) {
     .recipe-search-filters-section {
         justify-content: flex-start;
