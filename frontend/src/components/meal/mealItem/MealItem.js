@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import parse from 'html-react-parser';
 import { fetchRecipeInfo, 
          fetchRecipeNutritionInfo } from '../../util/ApiUtil';
+
+import NavBar from '../../landing/NavBar';
+import MealItemToggleInfo from './MealItemToggleInfo';
+import '../../../styles/mealItem.css';
 
 export default function MealItem() {
   const params = useParams();
@@ -26,35 +29,46 @@ export default function MealItem() {
 
   if (JSON.stringify(recipeInfo) === '{}') {
     return (   
-        <div>Loading...</div>
+      <div className='loading-container'>
+        <div className="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+     
     )
   } else {
     return (
-      <div>
-          <h1>{recipeInfo.title}</h1>
-          <Link to={{ pathname: '/addMeal',
+      <>
+        <NavBar />
+        <div className='meal-item-container'>
+          <div className='meal-item-title-div'>
+            <a className='back-arrow' href="/search">←</a>
+            <h1 className='meal-item-title'>{recipeInfo.title}</h1>
+          </div>
+          <div className='meal-item-info-div'>
+            <div className='meal-item-info-wrapper'>
+              <section className='minutes-and-servings'>
+                <p className='minutes'>{recipeInfo.readyInMinutes} minutes</p>
+                <p>{recipeInfo.servings} servings</p>
+              </section>
+              <section className='add-to-meal-plan-section'>
+                <Link className='nav-button' to={{ pathname: '/addMeal',
                       state: { recipeInfo: recipeInfo,
                                recipeNutritionInfo: recipeNutritionInfo }}}>
                         Add To Meal Plan</Link>
-          <img src={recipeInfo.image} alt={recipeInfo.title}></img>
-          <section>
-            <p>Ready in: {recipeInfo.readyInMinutes} minutes</p>
-            <p>Servings: {recipeInfo.servings}</p>
-            <h3>Ingredients</h3>
-            <ul>
-              {Object.values(recipeInfo.extendedIngredients).map((ingredient, idx) => <li key={idx}>{ingredient.original}</li>)}
-            </ul>
-            <h3>Instructions</h3>
-            <div>{parse(recipeInfo.instructions)}</div>
-          </section>
-          <section>
-            <h3>Nutrition per Serving</h3>
-            <p>Calories: {recipeNutritionInfo.calories}</p>
-            <p>Fat: {recipeNutritionInfo.fat}</p>
-            <p>Carbohydrates: {recipeNutritionInfo.carbs}</p>
-            <p>Protein: {recipeNutritionInfo.protein}</p>
-          </section>
-      </div>
+              </section>
+            </div>
+            <section className='meal-item-image-section'>
+              <img className='meal-item-image' src={recipeInfo.image} alt={recipeInfo.title}></img>
+            </section>
+            <MealItemToggleInfo recipeInfo={recipeInfo} />
+          </div>
+          
+        </div>
+      </>
     )
   } 
 }
