@@ -2,23 +2,12 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/landing.css';
 import HamburgerMenu from './HamburgerMenu';
 import { NavLink } from 'react-router-dom';
-import { validateJwtToken } from '../util/ApiUtil';
+import { useUser } from '../userProvider/UserProvider';
 
 export default function NavBar() {
     const [windowSize, setWindowSize] = useState(window.innerWidth);
+    const user = useUser();
 
-    const jwt = JSON.parse(localStorage.getItem('jwt'));
-    const [loggedIn, setLoggedIn] = useState(false);
-
-    useEffect(() => {
-      const checkLoggedIn = () => validateJwtToken(jwt).then(response => {
-        if (response.data === true) {
-          setLoggedIn(true);
-        }
-      })
-      checkLoggedIn();
-    }, [jwt])
-    
     useEffect(() => {
         const handleWindowResize = () => {
             setWindowSize(window.innerWidth)
@@ -31,7 +20,7 @@ export default function NavBar() {
     });
 
     const renderLogin = () => {
-      if (!loggedIn) {
+      if (!user.jwt) {
         return <NavLink className='nav-button' to={'/login'}>LOG IN</NavLink>;
       }
 
@@ -41,7 +30,7 @@ export default function NavBar() {
     if (windowSize < 780) {
       return (
         <div className='outer-container'>
-         <HamburgerMenu loggedIn={loggedIn} pageWrapId={'page-wrap'} outerContainerId={'container'} />
+         <HamburgerMenu loggedIn={user.jwt ? true : false} pageWrapId={'page-wrap'} outerContainerId={'container'} />
          <div className='page-wrap'>
            <header className='landing-header'>
              <i className="fa fa-cutlery logo logo-small-screen" aria-hidden="true"></i>
