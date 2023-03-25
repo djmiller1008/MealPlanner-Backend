@@ -48,8 +48,7 @@ export const login = async user => {
     if (response.status === 200) {
         return {
             jwtToken: response.headers.authorization,
-            user: response.data,
-            message: ""
+            user: response.data
         }
     }
     return response;
