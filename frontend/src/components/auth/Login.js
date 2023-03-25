@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as APIUtil from '../util/ApiUtil';
-import { useLocalState } from '../util/LocalStorageUtil';
 import '../../styles/auth.css';
+import { useUser } from '../userProvider/UserProvider';
 
 export default function Login() {
     const history = useHistory();
 
-    const [jwt, setJwt] = useLocalState("", "jwt");
+    const user = useUser();
     const [errorMessage, setErrorMessage] = useState(null);
 
     const [formData, setFormData] = useState({
@@ -16,31 +16,26 @@ export default function Login() {
     }); 
 
     useEffect(() => {
-        if (jwt) {
-            APIUtil.validateJwtToken(jwt).then(result => {
-                if (result.data === true) {
-                    history.replace("/");
-                }
-            })
+        if (user.jwt) {
+            history.replace("/");
         }
-    });
+    }, [user]);
 
     const removeErrorMessage = () => {
         setErrorMessage("");
         const authErrorDiv = document.getElementById('auth-error-div');
         authErrorDiv.style.display = 'none';
-    }
+    };
 
     const displayErrorMessage = message => {
         setErrorMessage(message);
         const authErrorDiv = document.getElementById('auth-error-div');
         authErrorDiv.style.display = 'flex';
-    }
-
+    };
 
     const handleInput = (e, dataType) => {
         setFormData({ ...formData, [dataType]: e.target.value});
-    }
+    };
 
     const handleSubmit = e => {  
         e.preventDefault();
@@ -49,10 +44,10 @@ export default function Login() {
                 displayErrorMessage(response.message);
             }
             if (response.jwtToken) {
-                setJwt(response.jwtToken);
+                user.setJwt(response.jwtToken);
             }
         })
-    }
+    };
 
     return (
         <div className='login-container'>
@@ -84,6 +79,6 @@ export default function Login() {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
