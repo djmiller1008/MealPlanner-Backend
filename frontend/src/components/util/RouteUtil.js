@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { validateJwtToken } from './ApiUtil';
+import { useUser } from '../userProvider/UserProvider';
 
 export const PrivateRoute = props => {
-    const jwt = JSON.parse(localStorage.getItem("jwt"));
+    const user = useUser();
+    
     const [isLoading, setIsLoading] = useState(true);
     const [isValid, setIsValid] = useState(null);
 
-    if (jwt) {
-        validateJwtToken(jwt).then(result => {
+    if (user && user.jwt) {
+        validateJwtToken(user.jwt).then(result => {
            setIsValid(result.data);
            setIsLoading(false);
         });
@@ -17,7 +19,16 @@ export const PrivateRoute = props => {
     }
 
     if (isLoading) {
-        return <div>Loading...</div>
+        return (
+            <div className='loading-container'>
+                <div className="lds-ring">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            )
     } else {
         if (isValid) {
             return <Route {...props} />;
