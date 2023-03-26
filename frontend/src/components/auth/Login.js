@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import * as APIUtil from '../util/ApiUtil';
 import '../../styles/auth.css';
 import { useUser } from '../userProvider/UserProvider';
@@ -64,16 +64,19 @@ export default function Login() {
                     </div>
                     <h1 className='auth-form-title'>Log in</h1>
                     <form onSubmit={handleSubmit}>
-                        <section className='auth-input-section'>
+                        <section className='input-section'>
                             <label className='auth-input-label' htmlFor='username'>Username</label>
-                            <input className='auth-input' onChange={e => handleInput(e, 'username')} type='text'></input>
+                            <input className='input' onChange={e => handleInput(e, 'username')} type='text'></input>
                         </section>
-                        <section className='auth-input-section'>
+                        <section className='input-section'>
                             <label className='auth-input-label' htmlFor='password'>Password</label>
-                            <input className='auth-input' onChange={e => handleInput(e, 'password')} type='password'></input>
+                            <input className='input' onChange={e => handleInput(e, 'password')} type='password'></input>
                         </section>
                         <section className='auth-button-section'>
-                            <input className='nav-button auth-button' type='submit' value='Login'></input>
+                            <input className='nav-button button' type='submit' value='Login'></input>
+                        </section>
+                        <section className='signup-button-section'>
+                            <Link className='signup-button' to={'/register'}>Sign up</Link>
                         </section>
                     </form>
                 </div>
