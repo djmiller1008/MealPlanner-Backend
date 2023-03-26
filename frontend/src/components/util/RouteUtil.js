@@ -5,7 +5,7 @@ import { useUser } from '../userProvider/UserProvider';
 
 export const PrivateRoute = props => {
     const user = useUser();
-    
+
     const [isLoading, setIsLoading] = useState(true);
     const [isValid, setIsValid] = useState(null);
 
