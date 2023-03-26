@@ -20,6 +20,7 @@ public class UserMealPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private int numberOfMeals;
 
     @OneToMany
     @JsonBackReference
@@ -29,6 +30,15 @@ public class UserMealPlan {
     @JsonIgnore
     private User user;
 
+
+    public int getNumberOfMeals() {
+        return this.numberOfMeals;
+    }
+
+    public void setNumberOfMeals(int numberOfMeals) {
+        this.numberOfMeals = numberOfMeals;
+    }
+
     public User getUser() {
         return this.user;
     }
@@ -36,7 +46,6 @@ public class UserMealPlan {
     public void setUser(User user) {
         this.user = user;
     }
-
 
     public Long getId() {
         return this.id;
@@ -65,6 +74,4 @@ public class UserMealPlan {
     public void addMeal(UserMeal meal) {
         this.meals.add(meal);
     }
-
-
 }
