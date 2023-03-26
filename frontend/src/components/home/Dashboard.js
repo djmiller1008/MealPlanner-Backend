@@ -1,9 +1,8 @@
 import React from 'react'
+import NavBar from '../landing/NavBar'
 import MealPlansDisplay from '../mealPlan/MealPlansDisplay'
-import NavBar from './NavBar'
 
-export default function Dashboard(props) {
-
+export default function Dashboard() {
   return (
     <>
       <NavBar />
