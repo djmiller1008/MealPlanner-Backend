@@ -54,6 +54,25 @@ export const login = async user => {
     return response;
 }
 
+export const register = async user => {
+    const response = await axios.post('api/users/register', user).catch(error => {
+        if (error.response.status === 401) {
+            return {
+                jwtToken: "",
+                user: null,
+                message: error.response.data
+            }
+        }
+    })
+    if (response.status === 200) {
+        return {
+            jwtToken: response.headers.authorization,
+            user: response.data
+        }
+    }
+    return response;
+}
+
 export const addUserRecipe = async recipeData => {
     const response = await axios.post('/api/user-meals', recipeData);
     return response;
