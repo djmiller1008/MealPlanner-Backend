@@ -80,8 +80,4 @@ public class Authority implements GrantedAuthority {
             ", user='" + getUser() + "'" +
             "}";
     }
-
-
-
-
 }
