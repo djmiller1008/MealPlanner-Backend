@@ -38,6 +38,7 @@ public class UserMealService {
         userMeal.setUserMealPlan(userMealPlan);
 
         userMealPlan.addMeal(userMeal);
+        userMealPlan.setNumberOfMeals(userMealPlan.getMeals().size());
 
         return userMealRepository.save(userMeal);
     }
