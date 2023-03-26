@@ -9,23 +9,27 @@ import CreateMealPlan from './components/mealPlan/CreateMealPlan';
 import AddToMealPlan from './components/mealPlan/AddToMealPlan';
 import MealPlanShow from './components/mealPlan/MealPlanShow';
 import LandingPage from './components/landing/LandingPage';
+import { UserProvider } from './components/userProvider/UserProvider';
+import Register from './components/auth/Register';
 
 
 function App() { 
  
   return (
     <div>
-      <Switch>
-        <Route exact path='/home' component={LandingPage} />
-        <Route exact path='/login' component={Login} />
-        <PrivateRoute exact path="/" component={Dashboard} />
-        <PrivateRoute exact path="/search" component={MealSearch} />
-        <PrivateRoute exact path='/meal/:id' component={MealItem} />
-        <PrivateRoute exact path="/create" component={CreateMealPlan} />
-        <PrivateRoute exact path="/addMeal" component={AddToMealPlan} />
-        <PrivateRoute exact path="/mealPlan/:id" component={MealPlanShow} />
-       
-      </Switch>
+      <UserProvider>
+        <Switch>
+          <Route exact path='/home' component={LandingPage} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/register' component={Register} />
+          <PrivateRoute exact path="/" component={Dashboard} />
+          <Route exact path="/search" component={MealSearch} />
+          <Route exact path='/meal/:id' component={MealItem} />
+          <PrivateRoute exact path="/create" component={CreateMealPlan} />
+          <PrivateRoute exact path="/addMeal" component={AddToMealPlan} />
+          <PrivateRoute exact path="/mealPlan/:id" component={MealPlanShow} />
+        </Switch>
+      </UserProvider>
     </div>
   ) 
 }
