@@ -1,5 +1,6 @@
 package com.recipeapp.RecipeApp.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,12 +18,16 @@ public class UserMeal {
     private int readyInMinutes;
     private int servings;
 
+    @Column(columnDefinition = "text")
     private String ingredients;
 
+    @Column(columnDefinition = "text")
+    
     private String instructions;
     private int calories;
     private int fat;
     private int carbohydrates;
+    private int protein;
     private int spoonacularId;
     private String imageUrl;
 
@@ -119,7 +124,6 @@ public class UserMeal {
     public void setProtein(int protein) {
         this.protein = protein;
     }
-    private int protein;
 
     public Long getId() {
         return this.id;
