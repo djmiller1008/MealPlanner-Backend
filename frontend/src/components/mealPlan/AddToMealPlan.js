@@ -41,7 +41,6 @@ export default function AddToMealPlan(props) {
         //recipeNutritionInfo.carbs
         //recipeNutritionInfo.fat
         //recipeNutritionInfo.protein
-
         const mealData = {};
         mealData['name'] = recipeInfo.title;
         mealData['readyInMinutes'] = recipeInfo.readyInMinutes;
@@ -51,6 +50,12 @@ export default function AddToMealPlan(props) {
             mealData['ingredients'][ingredient.name] = ingredient.aisle
         });
         mealData['mealPlanId'] = mealPlanId;
+        mealData['imageUrl'] = recipeInfo.image;
+        mealData['spoonacularId'] = recipeInfo.id;
+        mealData['calories'] = parseInt(recipeNutritionInfo.calories.slice(0, -1));
+        mealData['fat'] = parseInt(recipeNutritionInfo.fat.slice(0, -1));
+        mealData['carbohydrates'] = parseInt(recipeNutritionInfo.carbs.slice(0, -1));
+        mealData['protein'] = parseInt(recipeNutritionInfo.protein.slice(0, -1));
 
         addMealToMealPlan(JSON.stringify(mealData))
             .then(() => history.replace(`/mealPlan/${mealPlanId}`));
