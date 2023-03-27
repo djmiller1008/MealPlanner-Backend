@@ -5,8 +5,10 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
     const [jwt, setJwt] = useLocalState("", "jwt");
-    const value = { jwt, setJwt }
-    return <UserContext.Provider value={value}>{children}</UserContext.Provider>
+
+    const value = { jwt, setJwt };
+
+    return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 const useUser = () => {
@@ -14,7 +16,7 @@ const useUser = () => {
     if (context === undefined) {
       throw new Error("useUser must be used within a UserProvider");
     }
-  
+    
     return context;
   }
 
