@@ -16,12 +16,12 @@ export default function CreateMealPlan() {
       createUserMealPlan(mealPlanName).then(() => {
         history.replace("/");
       })
-    }
+    } 
     
     return (
       <>
         <NavBar />
-        <div className='new-meal-plan-container'>
+        <div className='new-mealplan-container'>
             <h1 className='mealplans-display-title'>Enter a Name For Your Meal Plan</h1>
             <form className='create-mealplan-form' onSubmit={(e) => handleSubmit(e)}>
               <section className='input-section'>
