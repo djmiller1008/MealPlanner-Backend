@@ -28,6 +28,12 @@ public class UserMealService {
         String ingredients = String.valueOf(payload.get("ingredients"));
         String name = String.valueOf(payload.get("name"));
         Long mealPlanId = Long.valueOf(String.valueOf(payload.get("mealPlanId")));
+        String imageUrl = String.valueOf(payload.get("imageUrl"));
+        int calories = Integer.valueOf(String.valueOf(payload.get("calories")));
+        int carbohydrates = Integer.valueOf(String.valueOf(payload.get("carbohydrates")));
+        int fat = Integer.valueOf(String.valueOf(payload.get("fat")));
+        int protein = Integer.valueOf(String.valueOf(payload.get("protein")));
+        int spoonacularId = Integer.valueOf(String.valueOf(payload.get("spoonacularId")));
 
         UserMealPlan userMealPlan = userMealPlanRepository.findById(mealPlanId).get();
 
@@ -36,6 +42,12 @@ public class UserMealService {
         userMeal.setReadyInMinutes(readyInMinutes);
         userMeal.setIngredients(ingredients);
         userMeal.setUserMealPlan(userMealPlan);
+        userMeal.setImageUrl(imageUrl);
+        userMeal.setCalories(calories);
+        userMeal.setFat(fat);
+        userMeal.setCarbohydrates(carbohydrates);
+        userMeal.setProtein(protein);
+        userMeal.setSpoonacularId(spoonacularId);
 
         userMealPlan.addMeal(userMeal);
         userMealPlan.setNumberOfMeals(userMealPlan.getMeals().size());
