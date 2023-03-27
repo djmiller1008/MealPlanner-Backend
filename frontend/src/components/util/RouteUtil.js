@@ -11,8 +11,12 @@ export const PrivateRoute = props => {
 
     if (user && user.jwt) {
         validateJwtToken(user.jwt).then(result => {
-           setIsValid(result.data);
-           setIsLoading(false);
+            setIsValid(result.data);
+            setIsLoading(false);
+
+            if (!result.data) {
+                user.setJwt("");
+            }
         });
     } else {
         return <Redirect to="/home" />;
