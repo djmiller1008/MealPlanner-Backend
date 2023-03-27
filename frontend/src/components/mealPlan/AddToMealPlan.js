@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { addMealToMealPlan, fetchUserMealPlans } from '../util/ApiUtil';
 import { useLocalState } from '../util/LocalStorageUtil';
+import NavBar from '../landing/NavBar';
 
 export default function AddToMealPlan(props) {
     const history = useHistory();
@@ -63,17 +64,18 @@ export default function AddToMealPlan(props) {
 
   
   return (
-    <div>
-        <h1>Add To Which Meal Plan?</h1>
-        <h2>Recipe: {recipeInfo.id}</h2>
-        <div>
+    <>
+        <NavBar />
+        <h1 className='mealplans-display-title'>Add {recipeInfo.title} To Which Meal Plan?</h1>
+        <div className='mealplan-items-container'>
             {mealPlans ? mealPlans.map((mealPlan, idx) => {
                 return (
-                    <div>
-                        <span onClick={e => handleAddToMealPlan(e, mealPlan.id)}>{mealPlan.name}</span>
+                    <div key={idx} onClick={e => handleAddToMealPlan(e, mealPlan.id)} className='mealplan-display-item-container'>
+                        <h3>{mealPlan.name.slice(1, -1)}</h3>
                     </div>
                 )}) : <></>}
+            
         </div>
-    </div>
+    </>
   )
 }
