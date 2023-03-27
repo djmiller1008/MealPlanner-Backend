@@ -23,7 +23,6 @@ export default function NavBar() {
       if (!user.jwt) {
         return <NavLink className='nav-button' to={'/login'}>LOG IN</NavLink>;
       }
-
       return <NavLink className='nav-button' to={'/'}>DASHBOARD</NavLink>;
     }
 
