@@ -12,13 +12,13 @@ export const fetchRecipeSearchResults = async (searchQuery, searchFilters) => {
     const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}`, {
             params: { query: searchQuery, ...searchFilters }
         }).catch(error => {
+            debugger
             if (error.response.status === 402) {
                 return {
                     message: "Daily API request limit reached. Please try again later."
                 }
             }
         })
-    
     if (response.status === 200) {
         return response.data.results;
     }
