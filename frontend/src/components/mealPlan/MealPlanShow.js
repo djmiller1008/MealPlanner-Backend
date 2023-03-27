@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import NavBar from '../landing/NavBar';
 import { fetchUserMealPlanMeals } from '../util/ApiUtil';
+import MealPlanMealItem from './MealPlanMealItem';
 
 
 export default function MealPlanShow(props) {
@@ -16,12 +18,21 @@ export default function MealPlanShow(props) {
     })
   }, [])
 
-  
   return (
-    <div>
-        <h1>{mealPlanName}</h1>
-        {meals ? meals.map(meal => <div>{meal.name}</div>) : ""}
-    </div>
+    <>
+      <NavBar />
+      <div className='mealplan-show-container'>
+          <section className='mealplan-show-title-container'>
+            <h1 className='mealplans-display-title'>{mealPlanName.slice(1, -1)}</h1>
+            <Link className='nav-button mealplan-show-button' to={'/search'} >Add New Recipe</Link>
+          </section>
+         
+          <div className='meals-display-container'>
+            {meals ? meals.map((meal, idx) => <MealPlanMealItem key={idx} meal={meal} />) : ""}
+          </div>
+          
+      </div>
+    </>
   )
 }
  
