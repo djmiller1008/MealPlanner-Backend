@@ -87,11 +87,6 @@
     margin-bottom: 2rem;
 }
 
-.mealplan-item-container:hover {
-    background-color: #5ebd21;
-    cursor: pointer;
-}
-
 .mealplan-item-image {
     height: 6.5rem;
     width: 6.5rem;
@@ -117,6 +112,34 @@
     padding-bottom: 2rem;
 }
 
+.mealplan-item-text-section {
+   height: 6.5rem;
+   width: 9.5rem;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.delete-meal-button {
+    align-self: baseline;
+    margin-top: 0.2rem;
+    margin-right: 0.35rem;
+    z-index: 99;
+}
+
+.delete-meal-button:hover {
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.mealplan-item-text:hover {
+    color: #5ebd21;
+    cursor: pointer;
+}
+
+.mealplan-item-image:hover {
+    cursor: pointer;
+}
 
 @media (min-width: 780px) {
     .mealplans-content-header {

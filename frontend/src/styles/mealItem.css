@@ -12,6 +12,12 @@
 .back-arrow {
     font-size: 2rem;
     margin-right: 0.25rem;
+    background-color: transparent;
+}
+
+.back-arrow:hover {
+    color:#5ebd21;
+    cursor: pointer;
 }
 
 .meal-item-title {
