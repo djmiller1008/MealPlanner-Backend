@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useHistory } from 'react-router-dom'
 import { fetchRecipeInfo, 
          fetchRecipeNutritionInfo } from '../../util/ApiUtil';
 
@@ -8,6 +8,7 @@ import MealItemToggleInfo from './MealItemToggleInfo';
 import '../../../styles/mealItem.css';
 
 export default function MealItem() {
+  const history = useHistory();
   const params = useParams();
   const [recipeInfo, setRecipeInfo] = useState({});
   const [recipeNutritionInfo, setRecipeNutritionInfo] = useState({});
@@ -27,6 +28,11 @@ export default function MealItem() {
     getRecipeNutritionInfo();
   }, []);
 
+  const handleBackArrowClick = e => {
+    e.preventDefault();
+    history.replace("/search");
+  }
+
   if (JSON.stringify(recipeInfo) === '{}') {
     return (   
       <div className='loading-container'>
@@ -45,7 +51,7 @@ export default function MealItem() {
         <NavBar />
         <div className='meal-item-container'>
           <div className='meal-item-title-div'>
-            <a className='back-arrow' href="/search">←</a>
+            <button className='back-arrow'  onClick={handleBackArrowClick}>←</button>
             <h1 className='meal-item-title'>{recipeInfo.title}</h1>
           </div>
           <div className='meal-item-info-div'>
