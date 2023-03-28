@@ -98,6 +98,11 @@ export const fetchUserMealPlanMeals = async mealPlanId => {
     return response;
 } 
 
+export const deleteMealFromMealPlan = async (mealPlanId, mealId) => {
+    const response = await axios.delete(`/api/user-meals/${mealPlanId}/${mealId}`, getSpringRequestConfig());
+    return response;
+}
+
 export const validateJwtToken = async token => {
     const response = await axios.get(`/api/auth/validate?token=${token}`, getSpringRequestConfig());
     return response;
