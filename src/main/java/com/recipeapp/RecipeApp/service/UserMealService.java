@@ -19,6 +19,9 @@ public class UserMealService {
 
     @Autowired
     private UserMealPlanRepository userMealPlanRepository;
+
+    @Autowired
+    private UserMealPlanService userMealPlanService;
     
     public UserMeal createUserMeal(Map<String, Object> payload) {
         UserMeal userMeal = new UserMeal();
@@ -53,5 +56,10 @@ public class UserMealService {
         userMealPlan.setNumberOfMeals(userMealPlan.getMeals().size());
 
         return userMealRepository.save(userMeal);
+    }
+
+    public void delete(Long mealId, Long mealPlanId) {
+        userMealPlanService.deleteMealById(mealPlanId, mealId);
+        userMealRepository.deleteById(mealId);
     }
 }

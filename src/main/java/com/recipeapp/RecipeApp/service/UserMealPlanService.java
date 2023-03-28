@@ -37,4 +37,15 @@ public class UserMealPlanService {
         UserMealPlan userMealPlan = userMealPlanRepository.findById(mealPlanId).get();
         return userMealPlan;
     }
+
+    public void deleteMealById(Long mealPlanId, Long mealId) {
+        UserMealPlan userMealPlan = userMealPlanRepository.findById(mealPlanId).get();
+        List<UserMeal> userMeals = userMealPlan.getMeals();
+        for (int i = 0; i < userMeals.size(); i++) {
+            if (mealId == userMeals.get(i).getId()) {
+                userMeals.remove(i);
+            }
+        }
+        userMealPlanRepository.save(userMealPlan);
+    }
 }
