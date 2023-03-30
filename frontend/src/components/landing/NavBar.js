@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/landing.css';
 import HamburgerMenu from './HamburgerMenu';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useUser } from '../userProvider/UserProvider';
 
 export default function NavBar() {
+    const history = useHistory();
     const [windowSize, setWindowSize] = useState(window.innerWidth);
     const user = useUser();
 
@@ -19,17 +20,28 @@ export default function NavBar() {
         };
     });
 
+    const logout = (e) => {
+      e.preventDefault();
+      user.setJwt("");
+      history.replace("/");
+    }
+
     const renderLogin = () => {
       if (!user.jwt) {
         return <NavLink className='nav-button' to={'/login'}>LOG IN</NavLink>;
       }
-      return <NavLink className='nav-button' to={'/'}>DASHBOARD</NavLink>;
+      return (
+        <section className='links-section'>
+          <NavLink className='nav-button' to={'/'}>DASHBOARD</NavLink>
+          <button onClick={logout} className='nav-button logout'>Logout</button>
+        </section>
+      )
     }
 
     if (windowSize < 780) {
       return (
         <div className='outer-container'>
-         <HamburgerMenu loggedIn={user.jwt ? true : false} pageWrapId={'page-wrap'} outerContainerId={'container'} />
+         <HamburgerMenu user={user} loggedIn={user.jwt ? true : false} pageWrapId={'page-wrap'} outerContainerId={'container'} />
          <div className='page-wrap'>
            <header className='landing-header'>
              <i className="fa fa-cutlery logo logo-small-screen" aria-hidden="true"></i>
