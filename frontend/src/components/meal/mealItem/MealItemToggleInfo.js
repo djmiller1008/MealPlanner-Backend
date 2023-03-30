@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
-import parse from 'html-react-parser';
+import React, { useEffect, useState } from 'react';
+import { parseRecipeInstructions } from '../../util/ApiUtil';
 
 export default function MealItemToggleInfo({ recipeInfo }) {
     
     const [selected, setSelected] = useState('ingredients');
+    const [instructions, setInstructions] = useState("");
+
+    useEffect(() => {
+        async function parseInstructions() {
+            const recipeInfoResponse = await parseRecipeInstructions(recipeInfo.id);
+            setInstructions(recipeInfoResponse.data[0].steps)
+        }
+        parseInstructions();
+    })
 
     const toggleInfo = (e, info) => {
         e.preventDefault();
@@ -15,19 +24,14 @@ export default function MealItemToggleInfo({ recipeInfo }) {
     }
 
     const renderInstructions = () => {
-        let parser = new DOMParser();
-        let instructions = parser.parseFromString(recipeInfo.instructions, 'text/html');
-        instructions.querySelectorAll('li').forEach((instruction, idx) => {
-            instruction.className = 'list-item instruction';
-            const number = document.createElement('p');
-            number.className = 'instruction-number';
-            number.innerHTML = idx + 1;
-            instruction.prepend(number);
-        })
-        
-        instructions = instructions.body.innerHTML;
-       
-        return instructions;
+        return instructions.map((instruction, idx) => {
+            return (
+                <li key={idx} className='list-item instruction'>
+                    <p className='instruction-number'>{instruction.number}</p>
+                    {instruction.step}
+                </li>
+            )
+        });
     }
  
     if (selected === 'ingredients') {
@@ -52,7 +56,7 @@ export default function MealItemToggleInfo({ recipeInfo }) {
                     <button onClick={e => toggleInfo(e, 'instructions')} id='instructions' className='toggle-info selected-toggle-info'>Instructions</button>
                 </section>
                 <section className='info-list-section'>
-                    {parse(renderInstructions())}
+                    {renderInstructions()}
                 </section>
             </div>
         )
