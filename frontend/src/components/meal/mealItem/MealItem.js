@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useParams, Link, useHistory } from 'react-router-dom'
 import { fetchRecipeInfo, 
          fetchRecipeNutritionInfo } from '../../util/ApiUtil';
-
 import NavBar from '../../landing/NavBar';
 import MealItemToggleInfo from './MealItemToggleInfo';
 import '../../../styles/mealItem.css';
@@ -32,6 +31,7 @@ export default function MealItem() {
     e.preventDefault();
     history.replace("/search");
   }
+ 
 
   if (JSON.stringify(recipeInfo) === '{}') {
     return (   
@@ -43,8 +43,16 @@ export default function MealItem() {
           <div></div>
         </div>
       </div>
-     
     )
+  } else if (recipeInfo.message) {
+      return (
+        <>
+          <NavBar />
+          <div className='error-div'>
+            {recipeInfo.message}
+          </div>
+        </>
+      )
   } else {
     return (
       <>
