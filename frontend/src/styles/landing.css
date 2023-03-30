@@ -104,8 +104,18 @@
     color: black;
 }
 
+.menu-logout {
+    background-color: transparent;
+}
+
 .menu-item:hover {
     cursor: pointer;
+}
+
+.logout {
+    font-size: 1.1rem;
+    margin-left: 1rem;
+    font-weight: 500;
 }
 
 @media (min-width: 780px) {
