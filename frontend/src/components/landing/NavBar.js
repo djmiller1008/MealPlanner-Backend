@@ -41,7 +41,7 @@ export default function NavBar() {
     if (windowSize < 780) {
       return (
         <div className='outer-container'>
-         <HamburgerMenu user={user} loggedIn={user.jwt ? true : false} pageWrapId={'page-wrap'} outerContainerId={'container'} />
+         <HamburgerMenu user={user} pageWrapId={'page-wrap'} outerContainerId={'container'} />
          <div className='page-wrap'>
            <header className='landing-header'>
              <i className="fa fa-cutlery logo logo-small-screen" aria-hidden="true"></i>

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 
-export default function HamburgerMenu({ user, loggedIn }) {
+export default function HamburgerMenu({ user }) {
     const history = useHistory();
 
     const logout = (e) => {
@@ -12,14 +12,14 @@ export default function HamburgerMenu({ user, loggedIn }) {
     }
 
     const renderLogin = () => {
-        if (!loggedIn) {
+        if (!user.jwt) {
             return <NavLink className="menu-item" to={'/login'}>LOG IN</NavLink>;
         }
         return <NavLink className="menu-item" to={'/'}>DASHBOARD</NavLink>;
     }
 
     const renderLogout = () => {
-        if (loggedIn) {
+        if (user.jwt) {
             return <button onClick={logout} className='menu-item menu-logout'>LOGOUT</button>;
         }
     }
