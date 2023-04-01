@@ -55,6 +55,7 @@
     border-color: rgb(230, 230, 212);
     border-style: solid;
     margin-bottom: 1rem;
+    margin-right: 1rem;
     width: 12rem;
     height: 8rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 15px;
@@ -168,4 +169,5 @@
     .mealplan-item-container {
         margin-right: 2rem;
     }
+
 }
