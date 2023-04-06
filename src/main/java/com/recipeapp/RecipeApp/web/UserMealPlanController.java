@@ -1,8 +1,11 @@
 package com.recipeapp.RecipeApp.web;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,5 +42,16 @@ public class UserMealPlanController {
                         userMealPlanService.findMealsByMealPlanId(mealPlanId),
                         userMealPlanService.findById(mealPlanId))
         );
+    }
+
+    @DeleteMapping("{mealPlanId}")
+    public ResponseEntity<?> deleteMealPlan(@PathVariable Long mealPlanId) {
+        try {
+            userMealPlanService.deleteMealPlanById(mealPlanId);
+            return ResponseEntity.ok("Meal Plan Deleted");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
