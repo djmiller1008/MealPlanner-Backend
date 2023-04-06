@@ -48,4 +48,8 @@ public class UserMealPlanService {
         }
         userMealPlanRepository.save(userMealPlan);
     }
+
+    public void deleteMealPlanById(Long mealPlanId) {
+        userMealPlanRepository.deleteById(mealPlanId);
+    }
 }
