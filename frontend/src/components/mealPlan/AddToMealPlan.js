@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { addMealToMealPlan, fetchUserMealPlans } from '../util/ApiUtil';
-import { useLocalState } from '../util/LocalStorageUtil';
 import NavBar from '../landing/NavBar';
 
 export default function AddToMealPlan(props) {
     const history = useHistory();
 
-    const [recipeInfo, setRecipeInfo] = useLocalState(
+    const [recipeInfo, setRecipeInfo] = useState(
                                                     props.location.state.recipeInfo,
                                                     `recipeInfo${props.location.state.recipeInfo.id}`);
 
-    const [recipeNutritionInfo, setRecipeNutritionInfo] = useLocalState(
+    const [recipeNutritionInfo, setRecipeNutritionInfo] = useState(
                                                             props.location.state.recipeNutritionInfo,
                                                             `recipeNutritionInfo${props.location.state.recipeInfo.id}`);
 
@@ -25,23 +24,6 @@ export default function AddToMealPlan(props) {
     }, []);
 
     const handleAddToMealPlan = (e, mealPlanId) => {
-        // TODO add the recipe to a meal plan
-        // Need to pass name, readyInMinutes, servings, ingredients, instructions,
-        // calories, fat, carbs, protein, img url
-
-        //recipeInfoData.title -- name
-        //recipeInfoData.readyInMinutes
-        //recipeInfoData.servings 
-        //recipeInfoData.extendedIngredients.forEach(ingredient => {
-        //  ingredient.name : ingredient.aisle    
-        //})
-
-        //recipeInfoData.instructions -- in html 
-        //All nutrition has g or k at the end, need to trim, store as int
-        //recipeNutritionInfo.calories 
-        //recipeNutritionInfo.carbs
-        //recipeNutritionInfo.fat
-        //recipeNutritionInfo.protein
         const mealData = {};
         mealData['name'] = recipeInfo.title;
         mealData['readyInMinutes'] = recipeInfo.readyInMinutes;
