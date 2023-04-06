@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -22,7 +23,7 @@ public class UserMealPlan {
     private String name;
     private int numberOfMeals;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JsonBackReference
     private List<UserMeal> meals = new ArrayList<>();
 
@@ -32,6 +33,7 @@ public class UserMealPlan {
 
 
     public int getNumberOfMeals() {
+        this.numberOfMeals = this.meals.size();
         return this.numberOfMeals;
     }
 
