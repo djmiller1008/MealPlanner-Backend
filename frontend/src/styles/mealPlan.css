@@ -75,7 +75,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
 
 .mealplan-item-container {
@@ -143,6 +142,21 @@
     cursor: pointer;
 }
 
+.delete-mealplan-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.delete-mealplan-button {
+    background-color: transparent;
+    font-size: 1.15rem;
+}
+
+.delete-mealplan-button:hover {
+    cursor: pointer;
+}
+
 @media (min-width: 780px) {
     .mealplans-content-header {
         flex-direction: row;
@@ -169,5 +183,4 @@
     .mealplan-item-container {
         margin-right: 2rem;
     }
-
 }
