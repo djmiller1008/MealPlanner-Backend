@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import NavBar from '../landing/NavBar';
-import { fetchUserMealPlanMeals } from '../util/ApiUtil';
+import { deleteMealPlan, fetchUserMealPlanMeals } from '../util/ApiUtil';
 import MealPlanMealItem from './MealPlanMealItem';
 
 export default function MealPlanShow() {
   const params = useParams();
+  const history = useHistory();
 
   const [meals, setMeals] = useState(null);
   const [mealPlan, setMealPlan] = useState("");
@@ -16,6 +17,15 @@ export default function MealPlanShow() {
       setMealPlan(result.data.userMealPlanResponse);
     })
   }, [])
+
+  const handleDelete = e => {
+    e.preventDefault();
+    deleteMealPlan(mealPlan.id).then(response => {
+      if (response.status === 200) {
+        history.replace("/");
+      }
+    })
+  }
 
   const renderName = () => {
     if (mealPlan.name) {
@@ -34,6 +44,9 @@ export default function MealPlanShow() {
           </section>
           <div className='meals-display-container'>
             {meals ? meals.map((meal, idx) => <MealPlanMealItem mealPlanId={mealPlan.id} key={idx} meal={meal} />) : ""}
+          </div>
+          <div className='delete-mealplan-div'>
+            <button onClick={handleDelete} className='delete-mealplan-button'>Delete Meal Plan</button>
           </div>
       </div>
     </>
