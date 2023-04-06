@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { fetchUserMealPlans } from '../util/ApiUtil';
 import '../../styles/mealPlan.css';
 import MealPlanDisplayItem from './MealPlanDisplayItem';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function MealPlansDisplay() {
-    const history = useHistory();
     const [mealPlans, setMealPlans] = useState(null);
     
     useEffect(() => {
