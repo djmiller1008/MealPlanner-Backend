@@ -108,4 +108,13 @@
     .search-filter-select {
         margin-right: 1rem;
     }
+
+    .search-results-div {
+        justify-content: flex-start;
+    }
+
+    .searchlist-item-div {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
 }
