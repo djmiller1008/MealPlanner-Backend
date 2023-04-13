@@ -24,19 +24,6 @@ export default function MealSearch() {
     }
   }
 
-  const renderSearchResults = () => {
-    if (searchResults.message) {
-      return (
-        <div className='error-div'>
-          {searchResults.message}
-        </div>
-      )
-    }
-    if (searchResults.length > 0) {
-        return <MealSearchList recipes={searchResults} />
-    } 
-  }
-
   return (
     <>
       <NavBar />
@@ -59,7 +46,7 @@ export default function MealSearch() {
             <button className='nav-button search-button' onClick={handleSearch}>Search</button>
           </section>
         </div>
-        {renderSearchResults()}
+        <MealSearchList recipes={searchResults} />
     </>
   )
 }
