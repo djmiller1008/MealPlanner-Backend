@@ -63,6 +63,6 @@ public class AuthController {
         } catch (ExpiredJwtException e) {
             return ResponseEntity.ok(false);
         }
-      
     }
+
 }
