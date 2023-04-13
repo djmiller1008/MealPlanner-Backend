@@ -29,6 +29,7 @@ public class UserMealService {
         int readyInMinutes = Integer.valueOf(String.valueOf(payload.get("readyInMinutes")));
         int servings = Integer.valueOf(String.valueOf(payload.get("servings")));
         String ingredients = String.valueOf(payload.get("ingredients"));
+        String instructions = String.valueOf(payload.get("instructions"));
         String name = String.valueOf(payload.get("name"));
         Long mealPlanId = Long.valueOf(String.valueOf(payload.get("mealPlanId")));
         String imageUrl = String.valueOf(payload.get("imageUrl"));
@@ -44,6 +45,7 @@ public class UserMealService {
         userMeal.setServings(servings);
         userMeal.setReadyInMinutes(readyInMinutes);
         userMeal.setIngredients(ingredients);
+        userMeal.setInstructions(instructions);
         userMeal.setUserMealPlan(userMealPlan);
         userMeal.setImageUrl(imageUrl);
         userMeal.setCalories(calories);
