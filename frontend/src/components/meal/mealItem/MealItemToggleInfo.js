@@ -9,7 +9,7 @@ export default function MealItemToggleInfo({ recipeInfo }) {
     useEffect(() => {
         async function parseInstructions() {
             const recipeInfoResponse = await parseRecipeInstructions(recipeInfo.id);
-            setInstructions(recipeInfoResponse.data[0].steps)
+            setInstructions(recipeInfoResponse)
         }
         parseInstructions();
     })
