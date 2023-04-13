@@ -19,10 +19,16 @@ export const fetchRecipeSearchResults = async (searchQuery, searchFilters) => {
             }
         })
     if (response.status === 200) {
-        return response.data.results;
+        if (response.data.results.length === 0) {
+            return {
+                message: "No Results"
+            }
+        } else {
+            return response.data.results;
+        }
     }
     return response;
-} 
+}
 
 export const parseRecipeInstructions = async recipeId => {
     const response = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${API_KEY}`, {
@@ -34,7 +40,8 @@ export const parseRecipeInstructions = async recipeId => {
         }
     })
     if (response.status === 200) {
-        return response;
+        // Instructions are here
+        return response.data[0].steps;
     }
     return response;
 }
