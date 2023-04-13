@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import { addMealToMealPlan, fetchUserMealPlans } from '../util/ApiUtil';
+import { addMealToMealPlan, fetchUserMealPlans, parseRecipeInstructions } from '../util/ApiUtil';
 import NavBar from '../landing/NavBar';
 
 export default function AddToMealPlan(props) {
     const history = useHistory();
 
-    const [recipeInfo, setRecipeInfo] = useState(
-                                                    props.location.state.recipeInfo,
-                                                    `recipeInfo${props.location.state.recipeInfo.id}`);
-
-    const [recipeNutritionInfo, setRecipeNutritionInfo] = useState(
-                                                            props.location.state.recipeNutritionInfo,
-                                                            `recipeNutritionInfo${props.location.state.recipeInfo.id}`);
-
-
+    const recipeInfo = props.location.state.recipeInfo;
+                                                    
+    const recipeNutritionInfo = props.location.state.recipeNutritionInfo;
+                                                           
     const [mealPlans, setMealPlans] = useState(null);
 
     useEffect(() => {
@@ -23,7 +18,7 @@ export default function AddToMealPlan(props) {
         })
     }, []);
 
-    const handleAddToMealPlan = (e, mealPlanId) => {
+    const handleAddToMealPlan = async (e, mealPlanId) => {
         const mealData = {};
         mealData['name'] = recipeInfo.title;
         mealData['readyInMinutes'] = recipeInfo.readyInMinutes;
@@ -40,6 +35,9 @@ export default function AddToMealPlan(props) {
         mealData['carbohydrates'] = parseInt(recipeNutritionInfo.carbs.slice(0, -1));
         mealData['protein'] = parseInt(recipeNutritionInfo.protein.slice(0, -1));
 
+        const instructions = await parseRecipeInstructions(recipeInfo.id);
+        mealData['instructions'] = instructions;
+        
         addMealToMealPlan(JSON.stringify(mealData))
             .then(() => history.replace(`/mealPlan/${mealPlanId}`));
     }
