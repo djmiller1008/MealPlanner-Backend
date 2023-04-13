@@ -21,8 +21,8 @@ public class UserMeal {
     private String ingredients;
 
     @Column(columnDefinition = "text")
-    
     private String instructions;
+    
     private int calories;
     private int fat;
     private int carbohydrates;
