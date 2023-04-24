@@ -8,7 +8,7 @@ export const PrivateRoute = props => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [isValid, setIsValid] = useState(null);
-
+ 
     if (user && user.jwt) {
         validateJwtToken(user.jwt).then(result => {
             setIsValid(result.data);
