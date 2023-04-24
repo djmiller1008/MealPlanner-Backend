@@ -3,16 +3,17 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import NavBar from '../landing/NavBar';
 import { deleteMealPlan, fetchUserMealPlanMeals } from '../util/ApiUtil';
 import MealPlanMealItem from './MealPlanMealItem';
+import { useUser } from '../userProvider/UserProvider';
 
 export default function MealPlanShow() {
   const params = useParams();
   const history = useHistory();
-
+  const user = useUser();
   const [meals, setMeals] = useState(null);
   const [mealPlan, setMealPlan] = useState("");
 
   useEffect(() => {
-    fetchUserMealPlanMeals(params.id).then(result => {
+    fetchUserMealPlanMeals(params.id, user.jwt).then(result => {
       setMeals(result.data.userMealsResponse);
       setMealPlan(result.data.userMealPlanResponse);
     })
@@ -20,7 +21,7 @@ export default function MealPlanShow() {
 
   const handleDelete = e => {
     e.preventDefault();
-    deleteMealPlan(mealPlan.id).then(response => {
+    deleteMealPlan(mealPlan.id, user.jwt).then(response => {
       if (response.status === 200) {
         history.replace("/");
       }

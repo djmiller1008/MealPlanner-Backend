@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import NavBar from '../landing/NavBar';
 import { createUserMealPlan } from '../util/ApiUtil';
+import { useUser } from '../userProvider/UserProvider';
 
 export default function CreateMealPlan() {
     const history = useHistory();
+    const user = useUser();
     const [mealPlanName, setMealPlanName] = useState("");
 
     const handleInput = (e) => {
@@ -13,7 +15,7 @@ export default function CreateMealPlan() {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      createUserMealPlan(mealPlanName).then(() => {
+      createUserMealPlan(mealPlanName, user.jwt).then(() => {
         history.replace("/");
       })
     } 

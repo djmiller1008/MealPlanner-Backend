@@ -1,16 +1,18 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { deleteMealFromMealPlan } from '../util/ApiUtil';
+import { useUser } from '../userProvider/UserProvider';
 
 export default function MealPlanMealItem({ mealPlanId, meal }) {
   const history = useHistory();
+  const user = useUser();
 
   const handleClick = () => {
-    history.replace(`/meal/${meal.spoonacularId}`);
+    history.replace(`/meal/${mealPlanId}/${meal.spoonacularId}`, {meal: meal});
   }
 
   const handleDelete = () => {
-    deleteMealFromMealPlan(mealPlanId, meal.id).then(response => {
+    deleteMealFromMealPlan(mealPlanId, meal.id, user.jwt).then(response => {
       if (response.status === 200) {
         const item = document.getElementById(`meal-${meal.id}`);
         item.style.display = 'none';

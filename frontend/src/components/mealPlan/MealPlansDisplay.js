@@ -3,12 +3,14 @@ import { fetchUserMealPlans } from '../util/ApiUtil';
 import '../../styles/mealPlan.css';
 import MealPlanDisplayItem from './MealPlanDisplayItem';
 import { Link } from 'react-router-dom';
+import { useUser } from '../userProvider/UserProvider';
 
 export default function MealPlansDisplay() {
     const [mealPlans, setMealPlans] = useState(null);
+    const user = useUser();
     
     useEffect(() => {
-        fetchUserMealPlans().then(result => {
+        fetchUserMealPlans(user.jwt).then(result => {
             setMealPlans(result.data);
         })
     }, []);
