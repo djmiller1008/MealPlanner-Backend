@@ -32,7 +32,6 @@ export default function MealItem() {
     history.replace("/search");
   }
  
-
   if (JSON.stringify(recipeInfo) === '{}') {
     return (   
       <div className='loading-container'>
@@ -80,7 +79,6 @@ export default function MealItem() {
             </section>
             <MealItemToggleInfo recipeInfo={recipeInfo} />
           </div>
-          
         </div>
       </>
     )
