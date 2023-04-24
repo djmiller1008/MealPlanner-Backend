@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 import '../../styles/landing.css';
 import HamburgerMenu from './HamburgerMenu';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useUser } from '../userProvider/UserProvider';
+import { logout } from '../util/ApiUtil';
 
 export default function NavBar() {
     const history = useHistory();
@@ -20,10 +21,13 @@ export default function NavBar() {
         };
     });
 
-    const logout = (e) => {
+    const logoutUser = async (e) => {
       e.preventDefault();
-      user.setJwt("");
-      history.replace("/");
+      const response = await logout();
+      if (response.status === 200) {
+        user.setJwt("");
+        history.replace("/home");
+      }
     }
 
     const renderLogin = () => {
@@ -33,7 +37,7 @@ export default function NavBar() {
       return (
         <section className='links-section'>
           <NavLink className='nav-button' to={'/'}>DASHBOARD</NavLink>
-          <button onClick={logout} className='nav-button logout'>Logout</button>
+          <button onClick={logoutUser} className='nav-button logout'>Logout</button>
         </section>
       )
     }

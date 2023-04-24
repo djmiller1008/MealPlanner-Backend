@@ -1,15 +1,20 @@
 import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
+import { logout } from '../util/ApiUtil';
 import { slide as Menu } from 'react-burger-menu';
 
 export default function HamburgerMenu({ user }) {
     const history = useHistory();
 
-    const logout = (e) => {
+
+    const logoutUser = async (e) => {
         e.preventDefault();
-        user.setJwt("");
-        history.replace("/");
-    }
+        const response = await logout();
+        if (response.status === 200) {
+          user.setJwt("");
+          history.replace("/home");
+        }
+      }
 
     const renderLogin = () => {
         if (!user.jwt) {
@@ -20,7 +25,7 @@ export default function HamburgerMenu({ user }) {
 
     const renderLogout = () => {
         if (user.jwt) {
-            return <button onClick={logout} className='menu-item menu-logout'>LOGOUT</button>;
+            return <button onClick={logoutUser} className='menu-item menu-logout'>LOGOUT</button>;
         }
     }
 
