@@ -1,10 +1,10 @@
-import React, { createContext, useContext } from 'react';
-import { useLocalState } from '../util/LocalStorageUtil';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import Cookies from "js-cookie";
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-    const [jwt, setJwt] = useLocalState("", "jwt");
+    const [jwt, setJwt] = useState(Cookies.get("jwt"));
 
     const value = { jwt, setJwt };
 
