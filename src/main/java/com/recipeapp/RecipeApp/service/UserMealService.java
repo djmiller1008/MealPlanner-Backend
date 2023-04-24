@@ -10,7 +10,6 @@ import com.recipeapp.RecipeApp.repository.UserMealPlanRepository;
 
 import java.util.Map;
 
- 
 @Service
 public class UserMealService {
 
