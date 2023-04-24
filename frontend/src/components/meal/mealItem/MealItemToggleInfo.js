@@ -32,7 +32,7 @@ export default function MealItemToggleInfo({ recipeInfo }) {
                 </li>
             )
         });
-    }
+    } 
  
     if (selected === 'ingredients') {
         return (
