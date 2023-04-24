@@ -19,7 +19,7 @@ export default function Login() {
         if (user.jwt) {
             history.replace("/");
         }
-    }, [user]);
+    }, [user.jwt, history])
 
     const removeErrorMessage = () => {
         setErrorMessage("");
@@ -42,9 +42,8 @@ export default function Login() {
         APIUtil.login(formData).then(response => {
             if (response.message) {
                 displayErrorMessage(response.message);
-            }
-            if (response.jwtToken) {
-                user.setJwt(response.jwtToken);
+            } else {
+                user.setJwt(response.data);
             }
         })
     };
