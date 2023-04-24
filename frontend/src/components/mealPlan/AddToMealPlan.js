@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { addMealToMealPlan, fetchUserMealPlans, parseRecipeInstructions } from '../util/ApiUtil';
 import NavBar from '../landing/NavBar';
+import { useUser } from '../userProvider/UserProvider';
 
 export default function AddToMealPlan(props) {
     const history = useHistory();
-
+    const user = useUser();
     const recipeInfo = props.location.state.recipeInfo;
                                                     
     const recipeNutritionInfo = props.location.state.recipeNutritionInfo;
@@ -13,7 +14,7 @@ export default function AddToMealPlan(props) {
     const [mealPlans, setMealPlans] = useState(null);
 
     useEffect(() => {
-        fetchUserMealPlans().then(result => {
+        fetchUserMealPlans(user.jwt).then(result => {
             setMealPlans(result.data);
         })
     }, []);
@@ -23,9 +24,9 @@ export default function AddToMealPlan(props) {
         mealData['name'] = recipeInfo.title;
         mealData['readyInMinutes'] = recipeInfo.readyInMinutes;
         mealData['servings'] = recipeInfo.servings;
-        mealData['ingredients'] = {};
+        mealData['ingredients'] = [];
         recipeInfo.extendedIngredients.forEach(ingredient => {
-            mealData['ingredients'][ingredient.name] = ingredient.aisle
+            mealData['ingredients'].push(ingredient.original)
         });
         mealData['mealPlanId'] = mealPlanId;
         mealData['imageUrl'] = recipeInfo.image;
@@ -34,11 +35,15 @@ export default function AddToMealPlan(props) {
         mealData['fat'] = parseInt(recipeNutritionInfo.fat.slice(0, -1));
         mealData['carbohydrates'] = parseInt(recipeNutritionInfo.carbs.slice(0, -1));
         mealData['protein'] = parseInt(recipeNutritionInfo.protein.slice(0, -1));
+        mealData['instructions'] = {};
 
         const instructions = await parseRecipeInstructions(recipeInfo.id);
-        mealData['instructions'] = instructions;
-        
-        addMealToMealPlan(JSON.stringify(mealData))
+        instructions.forEach(instruction => {
+            mealData['instructions'][instruction.number] = instruction.step;
+        });
+        mealData['instructions'] = JSON.stringify(mealData['instructions']);
+
+        addMealToMealPlan(JSON.stringify(mealData), user.jwt)
             .then(() => history.replace(`/mealPlan/${mealPlanId}`));
     }
 
