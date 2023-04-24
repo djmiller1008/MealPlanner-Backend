@@ -97,6 +97,7 @@
 .instruction {
     display: flex;
     line-height: 1.5;
+    align-items: center;
 }
 
 .loading-container {
