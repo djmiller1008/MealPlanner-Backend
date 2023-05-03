@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useTransition } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/landing.css';
 import HamburgerMenu from './HamburgerMenu';
 import { NavLink, useHistory } from 'react-router-dom';
@@ -49,7 +49,7 @@ export default function NavBar() {
          <div className='page-wrap'>
            <header className='landing-header'>
              <i className="fa fa-cutlery logo logo-small-screen" aria-hidden="true"></i>
-             <h1 className='app-title'>mealPlanner</h1>
+             <a className='app-title-link' href='/home'><h1 className='app-title'>mealPlanner</h1></a>
            </header>
          </div>
         </div>
@@ -62,7 +62,7 @@ export default function NavBar() {
           <header className='landing-header'>
             <section className='title-and-links'>
             <i className="fa fa-cutlery logo logo-big-screen" aria-hidden="true"></i>
-              <h1 className='app-title-big-screen'>mealPlanner</h1>
+              <a className='app-title-link' href='/home'><h1 className='app-title-big-screen'>mealPlanner</h1></a>
               <NavLink className='title-link' to={"/search"}>RECIPES</NavLink>
             </section>
             <section className='nav-links-section'>
