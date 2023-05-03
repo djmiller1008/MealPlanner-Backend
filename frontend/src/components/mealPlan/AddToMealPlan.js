@@ -17,7 +17,7 @@ export default function AddToMealPlan(props) {
         fetchUserMealPlans(user.jwt).then(result => {
             setMealPlans(result.data);
         })
-    }, []);
+    }, [user.jwt]);
 
     const handleAddToMealPlan = async (e, mealPlanId) => {
         const mealData = {};
@@ -36,7 +36,6 @@ export default function AddToMealPlan(props) {
         mealData['carbohydrates'] = parseInt(recipeNutritionInfo.carbs.slice(0, -1));
         mealData['protein'] = parseInt(recipeNutritionInfo.protein.slice(0, -1));
         mealData['instructions'] = {};
-
         const instructions = await parseRecipeInstructions(recipeInfo.id);
         instructions.forEach(instruction => {
             mealData['instructions'][instruction.number] = instruction.step;

@@ -11,8 +11,6 @@ export default function MealPlanDisplayItem({ mealPlan }) {
     }
   }
 
- 
-
   return (
     <Link to={`/mealPlan/${mealPlan.id}`}>
       <div className='mealplan-display-item-container'>
