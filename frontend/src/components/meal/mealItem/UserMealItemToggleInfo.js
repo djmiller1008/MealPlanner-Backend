@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 
 export default function UserMealItemToggleInfo({ mealItem }) {
     const [selected, setSelected] = useState('ingredients');
-    const ingredients = mealItem.ingredients.slice(1, -1).split(', ');
+    const ingredients = mealItem.ingredients.slice(1, -1).split(/, (?=[\d/])/);
 
-    
     const toggleInfo = (e, info) => {
         e.preventDefault();
         if (info === 'ingredients') {
@@ -25,8 +24,6 @@ export default function UserMealItemToggleInfo({ mealItem }) {
         });
     }
 
-   
-    
     if (selected === 'ingredients') {
         return (
             <div className='meal-item-extended-info-div'>

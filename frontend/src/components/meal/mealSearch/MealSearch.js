@@ -11,7 +11,8 @@ export default function MealSearch() {
   const [searchFilters, setSearchFilters] = useState({
     cuisine: "",
     diet: "",
-    instructionsRequired: true
+    instructionsRequired: true,
+    number: 100
   });
 
   const [searchResults, setSearchResults] = useState([]);

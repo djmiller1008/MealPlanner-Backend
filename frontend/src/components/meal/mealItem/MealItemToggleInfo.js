@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { parseRecipeInstructions } from '../../util/ApiUtil';
 
 export default function MealItemToggleInfo({ recipeInfo }) {
-    
     const [selected, setSelected] = useState('ingredients');
     const [instructions, setInstructions] = useState("");
-
+    
     useEffect(() => {
         async function parseInstructions() {
             const recipeInfoResponse = await parseRecipeInstructions(recipeInfo.id);
             setInstructions(recipeInfoResponse)
         }
         parseInstructions();
-    })
+    }, [recipeInfo.id])
 
     const toggleInfo = (e, info) => {
         e.preventDefault();
