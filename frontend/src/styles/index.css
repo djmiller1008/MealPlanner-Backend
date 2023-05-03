@@ -26,6 +26,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 	font-family: 'Lato', 'sans-serif';
+	min-height: 100vh;
 }
 ol, ul, li {
 	list-style: none;
@@ -59,4 +60,8 @@ button {
 
 .nav-button:hover {
 	cursor: pointer;
+}
+
+#root {
+	min-height: 100vh;
 }
