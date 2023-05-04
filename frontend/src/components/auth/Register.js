@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import * as APIUtil from '../util/ApiUtil';
 import '../../styles/auth.css';
 import { useUser } from '../userProvider/UserProvider';
@@ -9,6 +9,7 @@ export default function Register() {
 
     const user = useUser();
     const [errorMessage, setErrorMessage] = useState(null);
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
 
     const [formData, setFormData] = useState({
         username: '',
@@ -22,15 +23,12 @@ export default function Register() {
     }, [user.jwt, history]);
 
     const removeErrorMessage = () => {
-        setErrorMessage("");
-        const authErrorDiv = document.getElementById('auth-error-div');
-        authErrorDiv.style.display = 'none';
+        setShowErrorMessage(false);
     };
 
     const displayErrorMessage = message => {
-        setErrorMessage(message);
-        const authErrorDiv = document.getElementById('auth-error-div');
-        authErrorDiv.style.display = 'flex';
+        setErrorMessage(message.map((error, idx) => <span key={idx}>{error}</span>));
+        setShowErrorMessage(true);
     };
 
     const handleInput = (e, dataType) => {
@@ -52,15 +50,18 @@ export default function Register() {
         <div className='login-container'>
             <div className='login-title-logo-div'>
                 <i className="fa fa-cutlery logo auth-logo" aria-hidden="true"></i>
-                <h1 className='login-title'>mealPlanner</h1>
+                <a href='/home' className='app-title-link'>
+                    <h1 className='login-title'>mealPlanner</h1>
+                </a>
             </div>
             
             <div className='auth-container-big-screen'>
                 <div className='auth-form-container'>
+                    {showErrorMessage && (
                     <div id='auth-error-div' className='auth-error-div'>
                         {errorMessage}
                         <span className='close-error-message' onClick={removeErrorMessage}>&times;</span>
-                    </div>
+                    </div> )}
                     <h1 className='auth-form-title'>Sign up</h1>
                     <form onSubmit={handleSubmit}>
                         <section className='input-section'>
