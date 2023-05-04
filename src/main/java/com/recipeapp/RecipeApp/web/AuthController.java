@@ -21,10 +21,9 @@ import io.jsonwebtoken.ExpiredJwtException;
 
 import com.recipeapp.RecipeApp.dto.AuthCredentialsRequest;
 import com.recipeapp.RecipeApp.util.JwtUtil;
+import com.recipeapp.RecipeApp.domain.User;
 
 import ch.qos.logback.core.util.Duration;
-
-import com.recipeapp.RecipeApp.domain.User;
 
 @RestController
 @RequestMapping("/api/auth")
