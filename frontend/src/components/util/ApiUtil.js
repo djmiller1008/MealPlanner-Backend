@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_KEY } from "../../config/keys";
 import Cookies from "js-cookie";
-
+import { parseRegisterError } from "./ParseErrorUtil";
 
 const getSpringRequestConfig = (token) => {
     return { headers: {
@@ -73,7 +73,7 @@ export const login = async user => {
         if (error.response.status === 401) {
             return {
                 user: null,
-                message: "Invalid Credentials"
+                message: ['Invalid Credentials']
             }
         } 
     })
@@ -91,10 +91,16 @@ export const register = async user => {
         if (error.response.status === 401) {
             return {
                 user: null,
-                message: 'Invalid Entry. Please Try Again.'
+                message: ['Username already exists']
+            }
+        } else if (error.response.status === 400) {
+            return {
+                user: null,
+                message: parseRegisterError(error.response.data)
             }
         }
     })
+  
     return response;
 }
 
