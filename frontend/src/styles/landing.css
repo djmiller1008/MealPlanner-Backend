@@ -173,6 +173,10 @@
     background: rgb(226, 230, 233);
 }
 
+.menu-item-demo {
+    background-color: transparent;
+}
+
 @media (min-width: 780px) {
     .landing-header {
         margin-top: 2rem;
@@ -190,7 +194,6 @@
 
     .landing-image {
         width: 32rem;
-
     }
 
     .landing-image-container {
@@ -237,5 +240,10 @@
     .logo-big-screen {
         position: relative;
         left: 1.5rem;
+    }
+
+    .demo-button {
+        font-weight: 500;
+        margin-right: 1rem;
     }
 }
