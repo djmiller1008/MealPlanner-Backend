@@ -32,7 +32,12 @@ export default function NavBar() {
 
     const renderLogin = () => {
       if (!user.jwt) {
-        return <NavLink className='nav-button' to={'/login'}>LOG IN</NavLink>;
+        return (
+        <>
+          <button className='nav-button demo-button'>DEMO</button>
+          <NavLink className='nav-button' to={'/login'}>LOG IN</NavLink>
+        </>
+        );
       }
       return (
         <section className='links-section'>
