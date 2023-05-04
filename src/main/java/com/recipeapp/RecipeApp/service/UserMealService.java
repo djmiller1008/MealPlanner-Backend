@@ -19,7 +19,7 @@ public class UserMealService {
     @Autowired
     private UserMealPlanRepository userMealPlanRepository;
 
-    @Autowired
+    @Autowired 
     private UserMealPlanService userMealPlanService;
     
     public UserMeal createUserMeal(Map<String, Object> payload) {
