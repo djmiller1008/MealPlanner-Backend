@@ -18,7 +18,12 @@ export default function HamburgerMenu({ user }) {
 
     const renderLogin = () => {
         if (!user.jwt) {
-            return <NavLink className="menu-item" to={'/login'}>LOG IN</NavLink>;
+            return (
+                <>
+                    <NavLink className="menu-item bm-item" to={'/login'}>LOG IN</NavLink>
+                    <button className='menu-item bm-item menu-item-demo'>DEMO</button>
+                </>
+            );
         }
         return <NavLink className="menu-item" to={'/'}>DASHBOARD</NavLink>;
     }
