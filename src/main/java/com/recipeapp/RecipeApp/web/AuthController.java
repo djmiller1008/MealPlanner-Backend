@@ -38,7 +38,7 @@ public class AuthController {
     @Value("${cookies.domain}")
     private String domain;
     
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<?> login (@RequestBody AuthCredentialsRequest request) {
         try {
             Authentication authenticate = authenticationManager
@@ -68,6 +68,34 @@ public class AuthController {
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Credentials");
         }
+    }
+
+    @PostMapping("/demo")
+    public ResponseEntity<?> demoLogin() {
+        Authentication authenticate = authenticationManager
+                .authenticate(
+                    new UsernamePasswordAuthenticationToken("demoaccount", "demoaccountpassword")
+                    
+                );
+            
+            User user = (User) authenticate.getPrincipal();
+            user.setPassword(null);
+
+            String token = jwtUtil.generateToken(user);
+            ResponseCookie cookie = ResponseCookie.from("jwt", token)
+                .domain(domain)
+                .path("/")
+                .maxAge(Duration.buildByDays(365).getMilliseconds())
+                .build();
+
+            return ResponseEntity.ok()
+                .header(
+                    HttpHeaders.SET_COOKIE,
+                    cookie.toString()
+                )
+                .body(
+                    token
+                );
     }
 
     @GetMapping("/validate")
