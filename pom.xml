@@ -81,25 +81,42 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<configuration>
+        			<workingDirectory>${project.basedir}/frontend</workingDirectory>
+      			</configuration>
 				<executions>
 					<execution>
-						<id>copy-resources</id>
-						<phase>process-resources</phase>
+						<id>install node and npm</id>
 						<goals>
-							<goal>copy-resources</goal>
+							<goal>install-node-and-npm</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.directory}/classes/resources</outputDirectory>
-							<resources>
-								<resource>
-									<directory>/frontend</directory>
-								</resource>
-							</resources>
+							<nodeVersion>v16.15.0</nodeVersion>
+							<npmVersion>8.5.5</npmVersion>
 						</configuration>
 					</execution>
-				</executions>
-			</plugin>
+					<execution>
+						<id>npm install</id>
+                    <goals>
+                        <goal>npm</goal>
+                    </goals>
+                    <configuration>
+                        <arguments>install</arguments>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>npm run build</id>
+                    <goals>
+                        <goal>npm</goal>
+                    </goals>
+                    <configuration>
+                        <arguments>run build</arguments>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
 		</plugins>
 	</build>
 
