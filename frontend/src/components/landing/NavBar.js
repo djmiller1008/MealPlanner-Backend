@@ -3,7 +3,7 @@ import '../../styles/landing.css';
 import HamburgerMenu from './HamburgerMenu';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useUser } from '../userProvider/UserProvider';
-import { logout } from '../util/ApiUtil';
+import { logout, demoLogin } from '../util/ApiUtil';
 
 export default function NavBar() {
     const history = useHistory();
@@ -30,19 +30,27 @@ export default function NavBar() {
       }
     }
 
+    const handleDemoLogin = e => {
+      e.preventDefault();
+      demoLogin().then(response => {
+        user.setJwt(response.data);
+        history.replace("/")
+      })
+    }
+
     const renderLogin = () => {
       if (!user.jwt) {
         return (
         <>
-          <button className='nav-button demo-button'>DEMO</button>
-          <NavLink className='nav-button' to={'/login'}>LOG IN</NavLink>
+          <button onClick={handleDemoLogin} className='nav-button demo-button'>DEMO</button>
+          <NavLink className='nav-button' to={'/login'}>LOGIN</NavLink>
         </>
         );
       }
       return (
         <section className='links-section'>
           <NavLink className='nav-button' to={'/'}>DASHBOARD</NavLink>
-          <button onClick={logoutUser} className='nav-button logout'>Logout</button>
+          <button onClick={logoutUser} className='nav-button logout'>LOGOUT</button>
         </section>
       )
     }
@@ -54,7 +62,7 @@ export default function NavBar() {
          <div className='page-wrap'>
            <header className='landing-header'>
              <i className="fa fa-cutlery logo logo-small-screen" aria-hidden="true"></i>
-             <a className='app-title-link' href='/home'><h1 className='app-title'>mealPlanner</h1></a>
+             <a className='app-title-link' href='/'><h1 className='app-title'>mealPlanner</h1></a>
            </header>
          </div>
         </div>
@@ -67,7 +75,7 @@ export default function NavBar() {
           <header className='landing-header'>
             <section className='title-and-links'>
             <i className="fa fa-cutlery logo logo-big-screen" aria-hidden="true"></i>
-              <a className='app-title-link' href='/home'><h1 className='app-title-big-screen'>mealPlanner</h1></a>
+              <a className='app-title-link' href='/'><h1 className='app-title-big-screen'>mealPlanner</h1></a>
               <NavLink className='title-link' to={"/search"}>RECIPES</NavLink>
             </section>
             <section className='nav-links-section'>

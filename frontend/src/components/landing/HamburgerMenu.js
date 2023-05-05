@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { logout } from '../util/ApiUtil';
+import { logout, demoLogin } from '../util/ApiUtil';
 import { slide as Menu } from 'react-burger-menu';
 
 export default function HamburgerMenu({ user }) {
@@ -16,12 +16,20 @@ export default function HamburgerMenu({ user }) {
         }
       }
 
+    const handleDemoLogin = e => {
+        e.preventDefault();
+        demoLogin().then(response => {
+          user.setJwt(response.data);
+          history.replace("/")
+        })
+      }
+
     const renderLogin = () => {
         if (!user.jwt) {
             return (
                 <>
-                    <NavLink className="menu-item bm-item" to={'/login'}>LOG IN</NavLink>
-                    <button className='menu-item bm-item menu-item-demo'>DEMO</button>
+                    <NavLink className="menu-item bm-item" to={'/login'}>LOGIN</NavLink>
+                    <button onClick={handleDemoLogin} className='menu-item bm-item menu-item-demo'>DEMO</button>
                 </>
             );
         }
