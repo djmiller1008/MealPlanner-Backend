@@ -1,18 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { parseRecipeInstructions } from '../../util/ApiUtil';
+import React, { useState } from 'react';
 
-export default function MealItemToggleInfo({ recipeInfo }) {
+export default function MealItemToggleInfo({ recipeInfo, parsedInstructions }) {
     const [selected, setSelected] = useState('ingredients');
-    const [instructions, setInstructions] = useState("");
     
-    useEffect(() => {
-        async function parseInstructions() {
-            const recipeInfoResponse = await parseRecipeInstructions(recipeInfo.id);
-            setInstructions(recipeInfoResponse)
-        }
-        parseInstructions();
-    }, [recipeInfo.id])
-
     const toggleInfo = (e, info) => {
         e.preventDefault();
         if (info === 'ingredients') {
@@ -23,7 +13,7 @@ export default function MealItemToggleInfo({ recipeInfo }) {
     }
 
     const renderInstructions = () => {
-        return instructions.map((instruction, idx) => {
+        return parsedInstructions.map((instruction, idx) => {
             return (
                 <li key={idx} className='list-item instruction'>
                     <p className='instruction-number'>{instruction.number}</p>
