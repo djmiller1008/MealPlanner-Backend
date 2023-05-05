@@ -17,7 +17,7 @@ import UserMealItem from './components/meal/mealItem/UserMealItem';
 function App() { 
  
   return (
-    <div>
+    <>
       <UserProvider>
         <Switch>
           <Route exact path='/home' component={LandingPage} />
@@ -32,7 +32,7 @@ function App() {
           <PrivateRoute exact path='/meal/:mealPlanId/:mealId' component={UserMealItem} />
         </Switch>
       </UserProvider>
-    </div>
+    </>
   ) 
 }
 
