@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_KEY } from "../../config/keys";
+import { API_KEY } from "./keys_prod";
 import Cookies from "js-cookie";
 import { parseRegisterError } from "./ParseErrorUtil";
 
