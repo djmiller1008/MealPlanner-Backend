@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2eda47cb.css",
+    "main.js": "/static/js/main.3ed71e17.js",
+    "static/media/MealItemShow.png": "/static/media/MealItemShow.1dd10be9679fac3a0926.png",
+    "static/media/MealSearch.png": "/static/media/MealSearch.84ff607edf4af05cb9c2.png",
+    "static/media/MealPlanShow.png": "/static/media/MealPlanShow.b283c4f203276a6152f7.png",
+    "static/media/MealItemIngredients.png": "/static/media/MealItemIngredients.14fc483a6bdbdcc2a0cd.png",
+    "static/media/MealItemInstructions.png": "/static/media/MealItemInstructions.671823b1adf6eb6f0905.png",
+    "index.html": "/index.html",
+    "main.2eda47cb.css.map": "/static/css/main.2eda47cb.css.map",
+    "main.3ed71e17.js.map": "/static/js/main.3ed71e17.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2eda47cb.css",
+    "static/js/main.3ed71e17.js"
+  ]
+}
