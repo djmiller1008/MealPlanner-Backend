@@ -1,1 +1,1 @@
-web: java -jar/target/RecipeApp.jar
+web: java -jar RecipeApp-0.0.1-SNAPSHOT.jar
