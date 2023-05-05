@@ -7,6 +7,7 @@ import '../../../styles/mealSearch.css';
 
 export default function MealSearch() {
 
+  const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFilters, setSearchFilters] = useState({
     cuisine: "",
@@ -18,11 +19,14 @@ export default function MealSearch() {
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = async e => {
+    setSearchResults([]);
+    setLoading(true);
     e.preventDefault();
     if (searchQuery.length > 0) {
         const results = await fetchRecipeSearchResults(searchQuery, searchFilters);
         setSearchResults(results);
     }
+    setLoading(false);
   }
 
   return (
@@ -46,7 +50,16 @@ export default function MealSearch() {
           <section className='search-button-section'>
             <button className='nav-button search-button' onClick={handleSearch}>Search</button>
           </section>
-        </div>
+        </div> 
+        {loading && 
+                <div className='loading-container'>
+                <div className="lds-ring">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>}
         <MealSearchList recipes={searchResults} />
     </>
   )
