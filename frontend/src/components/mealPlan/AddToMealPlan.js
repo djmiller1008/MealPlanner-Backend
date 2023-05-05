@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import { addMealToMealPlan, fetchUserMealPlans, parseRecipeInstructions } from '../util/ApiUtil';
+import { addMealToMealPlan, fetchUserMealPlans } from '../util/ApiUtil';
 import NavBar from '../landing/NavBar';
 import { useUser } from '../userProvider/UserProvider';
 
 export default function AddToMealPlan(props) {
     const history = useHistory();
     const user = useUser();
-    const recipeInfo = props.location.state.recipeInfo;
-                                                    
+    const recipeInfo = props.location.state.recipeInfo;                                               
     const recipeNutritionInfo = props.location.state.recipeNutritionInfo;
+    const recipeInstructions = props.location.state.recipeInstructions;
                                                            
     const [mealPlans, setMealPlans] = useState(null);
 
@@ -36,8 +36,7 @@ export default function AddToMealPlan(props) {
         mealData['carbohydrates'] = parseInt(recipeNutritionInfo.carbs.slice(0, -1));
         mealData['protein'] = parseInt(recipeNutritionInfo.protein.slice(0, -1));
         mealData['instructions'] = {};
-        const instructions = await parseRecipeInstructions(recipeInfo.id);
-        instructions.forEach(instruction => {
+        recipeInstructions.forEach(instruction => {
             mealData['instructions'][instruction.number] = instruction.step;
         });
         mealData['instructions'] = JSON.stringify(mealData['instructions']);
