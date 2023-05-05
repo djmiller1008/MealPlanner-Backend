@@ -80,6 +80,11 @@ export const login = async user => {
     return response;
 }
 
+export const demoLogin = async () => {
+    const response = await axios.post('api/auth/demo');
+    return response;
+}
+
 export const logout = async () => {
     const response = await axios.get('/api/auth/logout');
     Cookies.remove("jwt");
