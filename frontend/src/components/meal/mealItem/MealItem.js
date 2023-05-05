@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link, useHistory } from 'react-router-dom'
 import { fetchRecipeInfo, 
-         fetchRecipeNutritionInfo } from '../../util/ApiUtil';
+         fetchRecipeNutritionInfo,
+         parseRecipeInstructions } from '../../util/ApiUtil';
 import NavBar from '../../landing/NavBar';
 import MealItemToggleInfo from './MealItemToggleInfo';
 import '../../../styles/mealItem.css';
@@ -9,13 +10,16 @@ import '../../../styles/mealItem.css';
 export default function MealItem() {
   const history = useHistory();
   const params = useParams();
-  const [recipeInfo, setRecipeInfo] = useState({});
+  const [recipeInfo, setRecipeInfo] = useState(false);
   const [recipeNutritionInfo, setRecipeNutritionInfo] = useState({});
+  const [parsedInstructions, setParsedInstructions] = useState("");
   
   useEffect(() => {
     async function getRecipeInfo() {
         const recipeInfoResponse = await fetchRecipeInfo(params.id);
         setRecipeInfo(recipeInfoResponse);
+        const parsedInstructions = await parseRecipeInstructions(recipeInfoResponse.id);
+        setParsedInstructions(parsedInstructions);
     }
 
     async function getRecipeNutritionInfo() {
@@ -25,23 +29,26 @@ export default function MealItem() {
 
     getRecipeInfo();
     getRecipeNutritionInfo();
-  }, []);
+  }, [params.id]);
 
   const handleBackArrowClick = e => {
     e.preventDefault();
     history.replace("/search");
   }
  
-  if (JSON.stringify(recipeInfo) === '{}') {
+  if (!recipeInfo) {
     return (   
-      <div className='loading-container'>
-        <div className="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+      <>
+      <NavBar />
+        <div className='loading-container'>
+          <div className="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
-      </div>
+      </>
     )
   } else if (recipeInfo.message) {
       return (
@@ -70,14 +77,15 @@ export default function MealItem() {
               <section className='add-to-meal-plan-section'>
                 <Link className='nav-button' to={{ pathname: '/addMeal',
                       state: { recipeInfo: recipeInfo,
-                               recipeNutritionInfo: recipeNutritionInfo }}}>
+                               recipeNutritionInfo: recipeNutritionInfo,
+                               recipeInstructions: parsedInstructions }}}>
                         Add To Meal Plan</Link>
               </section>
             </div>
             <section className='meal-item-image-section'>
               <img className='meal-item-image' src={recipeInfo.image} alt={recipeInfo.title}></img>
             </section>
-            <MealItemToggleInfo recipeInfo={recipeInfo} />
+            <MealItemToggleInfo recipeInfo={recipeInfo} parsedInstructions={parsedInstructions} />
           </div>
         </div>
       </>
