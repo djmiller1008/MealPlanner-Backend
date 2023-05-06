@@ -31,7 +31,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
+        http.cors()
+                .configurationSource(request -> {
+                    CorsConfiguration configuration = new CorsConfiguration();
+                    configuration.setAllowedOrigins(Collections.singletonList("*"));
+                    configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE"));
+                    configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+                    return configuration;
+                })
+            .and().csrf().disable()
             .exceptionHandling().authenticationEntryPoint((request, response, ex) -> {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
             }).and()
