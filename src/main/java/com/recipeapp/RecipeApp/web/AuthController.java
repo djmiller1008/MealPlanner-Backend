@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 import io.jsonwebtoken.ExpiredJwtException;
 
@@ -25,6 +27,7 @@ import com.recipeapp.RecipeApp.domain.User;
 
 import ch.qos.logback.core.util.Duration;
 
+@CrossOrigin(origins = "https://mealplanner-backend.herokuapp.com")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
