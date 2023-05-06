@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.recipeapp.RecipeApp.domain.UserMeal;
 import com.recipeapp.RecipeApp.service.UserMealService;
 
 import java.util.Map;
 
+@CrossOrigin(origins = "https://mealtime.herokuapp.com/")
 @RestController
 @RequestMapping("/api/user-meals")
 public class UserMealController {

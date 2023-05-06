@@ -22,6 +22,7 @@ import com.recipeapp.RecipeApp.domain.User;
 import com.recipeapp.RecipeApp.dto.UserDto;
 import com.recipeapp.RecipeApp.service.UserService;
 import com.recipeapp.RecipeApp.util.JwtUtil;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import ch.qos.logback.core.util.Duration;
 import jakarta.validation.Valid;
@@ -29,6 +30,7 @@ import jakarta.validation.Valid;
 import java.util.Map;
 import java.util.HashMap;
 
+@CrossOrigin(origins = "https://mealtime.herokuapp.com/")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
