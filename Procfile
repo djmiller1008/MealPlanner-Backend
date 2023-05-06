@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/RecipeApp-0.0.1-SNAPSHOT.jar --server.port=$PORT & cd frontend && npm start
+web: java $JAVA_OPTS -jar target/RecipeApp-0.0.1-SNAPSHOT.jar --server.port=$PORT & cd frontend && serve -s build 
