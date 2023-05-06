@@ -18,7 +18,7 @@ import com.recipeapp.RecipeApp.service.UserMealPlanService;
 import com.recipeapp.RecipeApp.domain.User;
 import com.recipeapp.RecipeApp.domain.UserMealPlan;
 
-@CrossOrigin(origins = "https://mealtime.herokuapp.com/")
+@CrossOrigin(origins = "https://localhost:3000")
 @RestController
 @RequestMapping("/api/user-mealplans")
 public class UserMealPlanController {

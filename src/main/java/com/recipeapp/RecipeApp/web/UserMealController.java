@@ -16,7 +16,7 @@ import com.recipeapp.RecipeApp.service.UserMealService;
 
 import java.util.Map;
 
-@CrossOrigin(origins = "https://mealtime.herokuapp.com/")
+@CrossOrigin(origins = "https://localhost:3000")
 @RestController
 @RequestMapping("/api/user-meals")
 public class UserMealController {

@@ -27,7 +27,7 @@ import com.recipeapp.RecipeApp.domain.User;
 
 import ch.qos.logback.core.util.Duration;
 
-@CrossOrigin(origins = "https://mealtime.herokuapp.com/")
+@CrossOrigin(origins = "https://localhost:3000")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

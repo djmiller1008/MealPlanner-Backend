@@ -30,7 +30,7 @@ import jakarta.validation.Valid;
 import java.util.Map;
 import java.util.HashMap;
 
-@CrossOrigin(origins = "https://mealtime.herokuapp.com/")
+@CrossOrigin(origins = "https://localhost:3000")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
